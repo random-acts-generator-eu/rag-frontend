@@ -1,9 +1,12 @@
 import React from 'react';
+import './reset.css';
+
+import Login from './components/Login/Login';
 
 function App() {
   return (
     <div>
-      Random Act Generator
+      <Login />
     </div>
   );
 }
