@@ -1,5 +1,10 @@
+/* eslint-disable react/destructuring-assignment */
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
 import { LoginForm, Form, SideNote } from './Styles';
+
+import { loginDispatcher } from '../../actions/auth';
 
 class Login extends Component {
   state = {
@@ -11,11 +16,17 @@ class Login extends Component {
     this.setState({ [event.target.name]: event.target.value });
   };
 
+  loginHandler = event => {
+    event.preventDefault();
+    const { email, password } = this.state;
+    this.props.loginDispatcher(email, password);
+  };
+
   render() {
     const { email, password } = this.state;
     return (
       <LoginForm>
-        <Form>
+        <Form onSubmit={event => this.loginHandler(event)}>
           <h2>Welcome back,</h2>
           <div>
             <label htmlFor="Email">Email Address</label>
@@ -51,4 +62,12 @@ class Login extends Component {
   }
 }
 
-export default Login;
+const mapStateToProps = state => {
+  return {
+    state
+  };
+};
+export default connect(
+  mapStateToProps,
+  { loginDispatcher }
+)(Login);
