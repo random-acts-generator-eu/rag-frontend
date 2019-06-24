@@ -2,9 +2,17 @@ import React, { Component } from 'react';
 import { LoginForm, Form, SideNote } from './Styles';
 
 class Login extends Component {
-  state = {};
+  state = {
+    email: '',
+    password: ''
+  };
+
+  changeHandler = event => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
 
   render() {
+    const { email, password } = this.state;
     return (
       <LoginForm>
         <Form>
@@ -15,6 +23,8 @@ class Login extends Component {
               name="email"
               type="email"
               placeholder="Enter username"
+              value={email}
+              onChange={this.changeHandler}
               required
             />
           </div>
@@ -24,6 +34,8 @@ class Login extends Component {
               name="password"
               type="password"
               placeholder="Enter password"
+              value={password}
+              onChange={this.changeHandler}
               required
             />
           </div>
