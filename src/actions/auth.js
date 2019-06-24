@@ -1,7 +1,7 @@
 import axios from 'axios';
 import * as actionTypes from './actionTypes';
 
-const dummyLink = `http://localhost:5000/login`;
+const dummyLink = `http://localhost:5000/api/login`;
 const loading = payload => {
   return {
     type: actionTypes.LOADING,
