@@ -9,15 +9,15 @@ import Signup from './components/Signup/Signup';
 
 function App() {
   return (
-    <Router>
-      <Switch>
-        <div>
-          <Navigation />
+    <div>
+      <Router>
+        <Navigation />
+        <Switch>
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
-        </div>
-      </Switch>
-    </Router>
+        </Switch>
+      </Router>
+    </div>
   );
 }
 
