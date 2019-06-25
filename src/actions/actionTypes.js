@@ -7,5 +7,5 @@ export const ACTS = 'ACTS';
 
 export const ADD_CONTACTS = 'ADD_CONTACTS';
 export const FETCH_CONTACTS = 'FETCH_CONTACTS';
-export const EDIT_CONTACTS = 'EDIT_CONTACTS';
-export const DELETE_CONTACTS = 'DELETE_CONTACTS';
+export const EDIT_CONTACT = 'EDIT_CONTACT';
+export const DELETE_CONTACT = 'DELETE_CONTACT';

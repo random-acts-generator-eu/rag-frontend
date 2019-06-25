@@ -15,7 +15,7 @@ class ContactList extends Component {
     return (
       <Div>
         {list.map(contact => (
-          <Contact key={contact.id} contact={contact} />
+          <Contact key={contact._id} contact={contact} />
         ))}
       </Div>
     );

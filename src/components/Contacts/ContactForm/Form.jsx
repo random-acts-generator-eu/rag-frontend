@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './style.css';
-import { addContact } from '../../../actions/contacts';
+import { addContact, editContact } from '../../../actions/contacts';
 
 class Form extends Component {
   state = {
@@ -24,7 +24,6 @@ class Form extends Component {
       lastName: lastname,
       level
     };
-
     this.props.addContact(userDetails);
   };
 
@@ -99,5 +98,5 @@ class Form extends Component {
 
 export default connect(
   null,
-  { addContact }
+  { addContact, editContact }
 )(Form);

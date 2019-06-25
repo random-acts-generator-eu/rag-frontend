@@ -28,9 +28,23 @@ const failure = payload => {
   };
 };
 
-const fetchingContacts = payload => {
+const getContacts = payload => {
   return {
     type: actionTypes.FETCH_CONTACTS,
+    payload
+  };
+};
+
+const deletingContact = payload => {
+  return {
+    type: actionTypes.DELETE_CONTACT,
+    payload
+  };
+};
+
+const editingContact = payload => {
+  return {
+    type: actionTypes.EDIT_CONTACT,
     payload
   };
 };
@@ -56,7 +70,7 @@ const fetchContacts = () => async dispatch => {
     const response = await axios.get(`${BASE_URL}/contacts`, {
       headers
     });
-    dispatch(fetchingContacts(response.data));
+    dispatch(getContacts(response.data));
   } catch (error) {
     dispatch(failure(error.message));
   } finally {
@@ -64,4 +78,36 @@ const fetchContacts = () => async dispatch => {
   }
 };
 
-export { addContact, fetchContacts };
+const deleteContact = contactID => async dispatch => {
+  dispatch(loading(true));
+  try {
+    const response = await axios.delete(`${BASE_URL}/contacts/${contactID}`, {
+      headers
+    });
+    dispatch(deletingContact(response.data));
+  } catch (error) {
+    dispatch(failure(error.message));
+  } finally {
+    dispatch(loading(false));
+  }
+};
+
+const editContact = (contactID, contactDetails) => async dispatch => {
+  dispatch(loading(true));
+  try {
+    const response = await axios.put(
+      `${BASE_URL}/contacts/${contactID}`,
+      contactDetails,
+      {
+        headers
+      }
+    );
+    dispatch(editingContact(response.data));
+  } catch (error) {
+    dispatch(failure(error.message));
+  } finally {
+    dispatch(loading(false));
+  }
+};
+
+export { addContact, fetchContacts, deleteContact, editContact };
