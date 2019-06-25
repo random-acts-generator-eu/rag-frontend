@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/destructuring-assignment */
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 import { Card } from './Styles';
 
 const ServiceList = props => {
@@ -16,7 +16,9 @@ const ServiceList = props => {
       <p>
         <strong>Level:</strong> {level}
       </p>
-      <i className="far fa-edit" />
+      <Link to={`/service_list/edit/${_id}`}>
+        <i className="far fa-edit" />
+      </Link>
       <i className="fas fa-trash-alt" onClick={() => deleteHandler(_id)} />
     </Card>
   );

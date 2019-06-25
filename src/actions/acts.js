@@ -40,6 +40,12 @@ const addActsAction = payload => {
     payload
   };
 };
+const editActsAction = payload => {
+  return {
+    type: actionTypes.EDIT_ACTS,
+    payload
+  };
+};
 
 export const actsDispatcher = () => async dispatch => {
   dispatch(loading(true));
@@ -65,11 +71,7 @@ export const deleteActsDispatcher = id => async dispatch => {
   }
 };
 
-export const addActsDispatcher = (
-  description,
-  level,
-  history
-) => async dispatch => {
+export const addActsDispatcher = (description, level) => async dispatch => {
   dispatch(loading(true));
   try {
     const response = await axios.post(
@@ -81,7 +83,31 @@ export const addActsDispatcher = (
       { headers }
     );
     dispatch(addActsAction(response.data));
-    history.push('/');
+  } catch (error) {
+    dispatch(failure(error.message));
+  } finally {
+    dispatch(loading(false));
+  }
+};
+
+export const editActsDispatcher = (
+  description,
+  level,
+  id,
+  history
+) => async dispatch => {
+  dispatch(loading(true));
+  try {
+    const response = await axios.put(
+      `${BASE_URL}/${id}`,
+      {
+        description,
+        level
+      },
+      { headers }
+    );
+    dispatch(editActsAction(response.data));
+    history.push('/service_list');
   } catch (error) {
     dispatch(failure(error.message));
   } finally {

@@ -1,10 +1,11 @@
+/* eslint-disable react/sort-comp */
 /* eslint-disable react/self-closing-comp */
 /* eslint-disable react/destructuring-assignment */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { Form } from './Styles';
-import { addActsDispatcher } from '../../actions/acts';
+import { addActsDispatcher, editActsDispatcher } from '../../actions/acts';
 
 class Forms extends Component {
   state = {
@@ -19,16 +20,46 @@ class Forms extends Component {
   addHandler = event => {
     event.preventDefault();
     const { description, level } = this.state;
-    const { history } = this.props;
-    this.props.addActsDispatcher(description, level, history);
+    this.props.addActsDispatcher(description, level);
     this.setState({ description: '', level: '' });
   };
 
+  editHandler = event => {
+    event.preventDefault();
+    const { description, level } = this.state;
+    const { history } = this.props;
+    const { id } = this.props.match.params;
+
+    this.props.editActsDispatcher(description, level, id, history);
+    this.setState({ description: '', level: '' });
+  };
+
+  componentDidMount() {
+    const { header, acts } = this.props;
+    if (header === 'Edit') {
+      const { id } = this.props.match.params;
+      acts.forEach(act => {
+        if (act._id === id) {
+          this.setState({
+            description: act.description
+          });
+        }
+      });
+    }
+  }
+
   render() {
     const { description } = this.state;
+    const { header } = this.props;
     return (
-      <Form onSubmit={event => this.addHandler(event)}>
-        <h2>Add new act</h2>
+      <Form
+        onSubmit={
+          header === 'Edit'
+            ? event => this.editHandler(event)
+            : event => this.addHandler(event)
+        }
+      >
+        <h2>{header} act</h2>
         <div>
           <label htmlFor="description">Description</label>
           <textarea
@@ -38,6 +69,7 @@ class Forms extends Component {
             placeholder="Enter description.."
             value={description}
             onChange={this.changeHandler}
+            required
           ></textarea>
         </div>
         <div>
@@ -48,6 +80,7 @@ class Forms extends Component {
               name="level"
               value="easy"
               onChange={this.changeHandler}
+              required
             />
             <label htmlFor="Easy">Easy</label>
 
@@ -56,6 +89,7 @@ class Forms extends Component {
               name="level"
               value="medium"
               onChange={this.changeHandler}
+              required
             />
             <label htmlFor="medium">Medium</label>
 
@@ -64,11 +98,12 @@ class Forms extends Component {
               name="level"
               value="hard"
               onChange={this.changeHandler}
+              required
             />
             <label htmlFor="hard">Hard</label>
           </section>
         </div>
-        <button type="submit">Add New Act</button>
+        <button type="submit">{header} Act</button>
       </Form>
     );
   }
@@ -76,10 +111,10 @@ class Forms extends Component {
 
 const mapStateToProps = state => {
   return {
-    state
+    acts: state.act.acts
   };
 };
 export default connect(
   mapStateToProps,
-  { addActsDispatcher }
+  { addActsDispatcher, editActsDispatcher }
 )(Forms);

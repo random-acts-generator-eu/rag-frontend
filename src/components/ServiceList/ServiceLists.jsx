@@ -24,7 +24,7 @@ class ServiceLists extends Component {
             />
           ))}
         </Cards>
-        <Forms />
+        <Forms header="Add" />
       </div>
     );
   }
