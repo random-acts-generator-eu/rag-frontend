@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import './style.css';
+import { addContact } from '../../../actions/contacts';
 
-export default class Form extends Component {
+class Form extends Component {
   state = {
     firstname: '',
     lastname: '',
-    closeness: 0
+    level: ''
   };
 
   handleInputChange = event => {
@@ -14,11 +16,22 @@ export default class Form extends Component {
     });
   };
 
+  onAddContact = event => {
+    event.preventDefault();
+    const { firstname, lastname, level } = this.state;
+    const userDetails = {
+      firstName: firstname,
+      lastName: lastname,
+      level
+    };
+
+    this.props.addContact(userDetails);
+  };
+
   render() {
-    console.log(this.state);
     return (
       <div>
-        <form className="contact-form">
+        <form className="contact-form" onSubmit={this.onAddContact}>
           <h2> Add a New Contact to Your List</h2>
 
           <div className="input-field">
@@ -42,35 +55,36 @@ export default class Form extends Component {
             </div>
 
             <div className="radio-form">
+              <p> How close are you guys? </p>
               <div>
-                <label htmlFor="1">1</label>
                 <input
                   type="radio"
-                  name="closeness"
-                  id="closeness"
-                  value="1"
+                  name="level"
+                  id="level"
+                  value="friend"
                   onChange={this.handleInputChange}
                 />
+                <label htmlFor="1">Friend</label>
               </div>
               <div>
-                <label htmlFor="2">2</label>
                 <input
                   type="radio"
-                  name="closeness"
-                  id="closeness"
-                  value="2"
+                  name="level"
+                  id="level"
+                  value="close friend"
                   onChange={this.handleInputChange}
                 />
+                <label htmlFor="2">Close friend</label>
               </div>
               <div />
-              <label htmlFor="3">3</label>
               <input
                 type="radio"
-                name="closeness"
-                id="closeness"
-                value="3"
+                name="level"
+                id="level"
+                value="best friend"
                 onChange={this.handleInputChange}
               />
+              <label htmlFor="3">Best friend</label>
             </div>
 
             <div>
@@ -82,3 +96,8 @@ export default class Form extends Component {
     );
   }
 }
+
+export default connect(
+  null,
+  { addContact }
+)(Form);

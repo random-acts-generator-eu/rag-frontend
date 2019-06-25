@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-export const LoginForm = styled.div`
+export const SignupForm = styled.div`
   box-shadow: 2px 2px 2px 2px #373d51;
   width: 70%;
   margin: 5rem auto;
   display: flex;
   box-sizing: border-box;
+  flex-direction: row-reverse;
 `;
 export const Form = styled.form`
   background-color: white;
