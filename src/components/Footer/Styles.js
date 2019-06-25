@@ -6,7 +6,7 @@ export const Div = styled.div`
   color: white;
   display: flex;
   flex-direction: column;
-  background-color: black;
+  background-color: #101524;
   justify-content: center;
   align-items: center;
   padding: 1rem;
