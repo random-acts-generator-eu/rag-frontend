@@ -12,7 +12,7 @@ function Contact(props) {
       </p>
       <p>Closeness: {contact.level}</p>
       <button type="submit">Edit</button>
-      <button type="submit" onClick={() => deleteContact(contact._id)}>
+      <button type="submit" onClick={() => props.deleteContact(contact._id)}>
         delete
       </button>
     </Div>
