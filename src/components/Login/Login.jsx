@@ -2,8 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { LoginForm, Form, SideNote } from './Styles';
-
+import { LoginForm, Form, SideNote, LinkStyle } from './Styles';
 import { loginDispatcher } from '../../actions/auth';
 
 class Login extends Component {
@@ -19,7 +18,8 @@ class Login extends Component {
   loginHandler = event => {
     event.preventDefault();
     const { email, password } = this.state;
-    this.props.loginDispatcher(email, password);
+    const { history } = this.props;
+    this.props.loginDispatcher(email, password, history);
   };
 
   render() {
@@ -55,7 +55,7 @@ class Login extends Component {
         <SideNote>
           <h3>New Here?</h3>
           <p>Sign up and start losing yourself in the service of others!</p>
-          <button type="button">Sign Up</button>
+          <LinkStyle to="/signup">Sign Up</LinkStyle>
         </SideNote>
       </LoginForm>
     );

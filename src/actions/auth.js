@@ -1,7 +1,7 @@
 import axios from 'axios';
 import * as actionTypes from './actionTypes';
 
-const dummyLink = `http://localhost:5000/api/login`;
+const BASE_URL = `https://rag-eu.herokuapp.com/auth`;
 const loading = payload => {
   return {
     type: actionTypes.LOADING,
@@ -20,13 +20,60 @@ const failure = payload => {
     payload
   };
 };
+const contactsAction = payload => {
+  return {
+    type: actionTypes.CONTACTS,
+    payload
+  };
+};
+const actsAction = payload => {
+  return {
+    type: actionTypes.ACTS,
+    payload
+  };
+};
 
-// eslint-disable-next-line import/prefer-default-export
-export const loginDispatcher = (email, password) => async dispatch => {
+export const loginDispatcher = (email, password, history) => async dispatch => {
   dispatch(loading(true));
   try {
-    const response = await axios.post(dummyLink, { email, password });
+    const response = await axios.post(`${BASE_URL}/login`, { email, password });
+    const { contacts, acts } = response.data.user;
     dispatch(loggedIn(response.data.token));
+    localStorage.setItem('token', response.data.token);
+    dispatch(contactsAction(contacts));
+    dispatch(actsAction(acts));
+    history.push('/');
+  } catch (error) {
+    dispatch(failure(error.message));
+  } finally {
+    dispatch(loading(false));
+  }
+};
+
+export const signupDispatcher = (
+  firstName,
+  lastName,
+  email,
+  password,
+  phone,
+  history
+) => async dispatch => {
+  dispatch(loading(true));
+  try {
+    const response = await axios.post(`${BASE_URL}/register`, {
+      firstName,
+      lastName,
+      email,
+      password,
+      phone
+    });
+    const { contacts, acts } = response.data.user;
+
+    dispatch(loggedIn(response.data.token));
+    localStorage.setItem('token', response.data.token);
+    dispatch(contactsAction(contacts));
+    dispatch(actsAction(acts));
+    history.push('/');
   } catch (error) {
     dispatch(failure(error.message));
   } finally {
