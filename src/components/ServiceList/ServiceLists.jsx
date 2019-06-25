@@ -2,7 +2,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { actsDispatcher } from '../../actions/acts';
+import { actsDispatcher, deleteActsDispatcher } from '../../actions/acts';
+import ServiceList from './ServiceList';
+import { Cards } from './Styles';
 
 class ServiceLists extends Component {
   componentDidMount() {
@@ -10,10 +12,17 @@ class ServiceLists extends Component {
   }
 
   render() {
-    console.log(this.props.acts);
     return (
       <div>
-        <p>Hello</p>
+        <Cards>
+          {this.props.acts.map(act => (
+            <ServiceList
+              key={act._id}
+              act={act}
+              deleteHandler={this.props.deleteActsDispatcher}
+            />
+          ))}
+        </Cards>
       </div>
     );
   }
@@ -27,5 +36,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { actsDispatcher }
+  { actsDispatcher, deleteActsDispatcher }
 )(ServiceLists);

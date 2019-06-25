@@ -5,3 +5,5 @@ export const LOGGED_IN = 'LOGGED_IN';
 export const CONTACTS = 'CONTACTS';
 export const ACTS = 'ACTS';
 export const GET_ACTS = 'GET_ACTS';
+export const DELETE_ACTS = 'DELETE_ACTS';
+export const EDIT_ACTS = 'EDIT_ACTS';

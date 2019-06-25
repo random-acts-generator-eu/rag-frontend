@@ -1,31 +1,25 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/destructuring-assignment */
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
 
-import { actsDispatcher } from '../../actions/acts';
+import { Card } from './Styles';
 
-class ServiceList extends Component {
-  componentDidMount() {
-    this.props.actsDispatcher();
-  }
-
-  render() {
-    console.log(this.props.acts);
-    return (
-      <div>
-        <p>Hello</p>
-      </div>
-    );
-  }
-}
-
-const mapStateToProps = state => {
-  return {
-    acts: state.act.acts
-  };
+const ServiceList = props => {
+  const { description, level, _id } = props.act;
+  const { deleteHandler } = props;
+  return (
+    <Card>
+      <p>
+        <strong>Description:</strong> {description}
+      </p>
+      <p>
+        <strong>Level:</strong> {level}
+      </p>
+      <i className="far fa-edit" />
+      <i className="fas fa-trash-alt" onClick={() => deleteHandler(_id)} />
+    </Card>
+  );
 };
 
-export default connect(
-  mapStateToProps,
-  { actsDispatcher }
-)(ServiceList);
+export default ServiceList;

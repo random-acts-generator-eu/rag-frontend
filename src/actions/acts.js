@@ -28,12 +28,31 @@ const actsAction = payload => {
   };
 };
 
+const deleteActsAction = payload => {
+  return {
+    type: actionTypes.DELETE_ACTS,
+    payload
+  };
+};
+
 // eslint-disable-next-line import/prefer-default-export
 export const actsDispatcher = () => async dispatch => {
   dispatch(loading(true));
   try {
     const response = await axios.get(BASE_URL, { headers });
     dispatch(actsAction(response.data));
+  } catch (error) {
+    dispatch(failure(error.message));
+  } finally {
+    dispatch(loading(false));
+  }
+};
+
+export const deleteActsDispatcher = id => async dispatch => {
+  dispatch(loading(true));
+  try {
+    const response = await axios.delete(`${BASE_URL}/${id}`, { headers });
+    dispatch(deleteActsAction(response.data));
   } catch (error) {
     dispatch(failure(error.message));
   } finally {
