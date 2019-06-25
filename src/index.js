@@ -5,9 +5,11 @@ import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
 import thunk from 'redux-thunk';
 import App from './App';
 import authReducer from './reducers/auth';
+import actsReducer from './reducers/acts';
 
 const rootReducer = combineReducers({
-  auth: authReducer
+  auth: authReducer,
+  act: actsReducer
 });
 
 const store = createStore(
