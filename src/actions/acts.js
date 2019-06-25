@@ -34,8 +34,13 @@ const deleteActsAction = payload => {
     payload
   };
 };
+const addActsAction = payload => {
+  return {
+    type: actionTypes.ADD_ACTS,
+    payload
+  };
+};
 
-// eslint-disable-next-line import/prefer-default-export
 export const actsDispatcher = () => async dispatch => {
   dispatch(loading(true));
   try {
@@ -53,6 +58,30 @@ export const deleteActsDispatcher = id => async dispatch => {
   try {
     const response = await axios.delete(`${BASE_URL}/${id}`, { headers });
     dispatch(deleteActsAction(response.data));
+  } catch (error) {
+    dispatch(failure(error.message));
+  } finally {
+    dispatch(loading(false));
+  }
+};
+
+export const addActsDispatcher = (
+  description,
+  level,
+  history
+) => async dispatch => {
+  dispatch(loading(true));
+  try {
+    const response = await axios.post(
+      `${BASE_URL}`,
+      {
+        description,
+        level
+      },
+      { headers }
+    );
+    dispatch(addActsAction(response.data));
+    history.push('/');
   } catch (error) {
     dispatch(failure(error.message));
   } finally {

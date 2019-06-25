@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import { actsDispatcher, deleteActsDispatcher } from '../../actions/acts';
 import ServiceList from './ServiceList';
+import Forms from './Forms';
 import { Cards } from './Styles';
 
 class ServiceLists extends Component {
@@ -23,6 +24,7 @@ class ServiceLists extends Component {
             />
           ))}
         </Cards>
+        <Forms />
       </div>
     );
   }

@@ -23,6 +23,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         acts: action.payload
       };
+    case types.ADD_ACTS:
+      return {
+        ...state,
+        acts: action.payload
+      };
     case types.FAILURE:
       return {
         ...state,
