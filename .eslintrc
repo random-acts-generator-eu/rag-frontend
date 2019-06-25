@@ -1,26 +1,55 @@
 {
-    "extends": ["airbnb", "prettier", "prettier/react"],
-    "plugins": ["prettier"],
+  "extends": ["airbnb", "prettier", "prettier/react"],
+  "plugins": ["prettier"],
+  "rules": {
     "rules": {
-      "react/jsx-filename-extension": [
-        1,
+      "prefer-destructuring": [
+        "error",
         {
-          "extensions": [".js", ".jsx"]
+          "array": true,
+          "object": true
+        },
+        {
+          "enforceForRenamedProperties": false
         }
-      ],
-      "react/prop-types": 0,
-      "no-underscore-dangle": 0,
-      "import/imports-first": ["error", "absolute-first"],
-      "import/newline-after-import": "error"
+      ]
     },
-    "globals": {
-      "window": true,
-      "document": true,
-      "localStorage": true,
-      "FormData": true,
-      "FileReader": true,
-      "Blob": true,
-      "navigator": true
-    },
-    "parser": "babel-eslint"
-  }
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [".js", ".jsx"]
+      }
+    ],
+    "jsx-a11y/label-has-associated-control": [
+      "error",
+      {
+        "required": {
+          "some": ["nesting", "id"]
+        }
+      }
+    ],
+    "jsx-a11y/label-has-for": [
+      "error",
+      {
+        "required": {
+          "some": ["nesting", "id"]
+        }
+      }
+    ],
+    "react/prop-types": 0,
+    "no-underscore-dangle": 0,
+    "import/imports-first": ["error", "absolute-first"],
+    "import/newline-after-import": "error"
+  },
+  "globals": {
+    "window": true,
+    "document": true,
+    "localStorage": true,
+    "FormData": true,
+    "FileReader": true,
+    "Blob": true,
+    "navigator": true
+  },
+  "parser": "babel-eslint"
+}
+
