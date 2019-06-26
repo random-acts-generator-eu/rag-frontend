@@ -1,6 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import ContactspageView from './components/Contacts/ContactsPageView';
 import './reset.css';
 
 import Navigation from './components/Navigation/Navigation';
@@ -17,6 +18,7 @@ function App() {
         <Switch>
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
+          <Route exact path="/contacts" component={ContactspageView} />
           <Route exact path="/service_list" component={ServiceLists} />
         </Switch>
         <Footer />
