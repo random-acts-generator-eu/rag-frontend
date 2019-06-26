@@ -32,7 +32,6 @@ class Form extends Component {
   onEditContact = event => {
     event.preventDefault();
     const { firstname, lastname, level } = this.state;
-    // const { history } = this.props;
     const { id } = this.props.match.params;
 
     const contactDetails = {

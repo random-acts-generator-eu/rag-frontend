@@ -66,7 +66,7 @@ const ButtonDiv = styled.div`
     font-size: 11px;
     color: #2e004e;
 
-    button:hover {
+    :hover {
       background-color: #2e004e;
       box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
       color: #fff;

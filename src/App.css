@@ -3,7 +3,7 @@ body {
   height: 100%;
 }
 
-.main-container {
+.app-container {
   min-height: 100%;
   position: relative;
 }

@@ -1,6 +1,14 @@
+/* eslint-disable react/destructuring-assignment */
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { connect } from 'react-redux';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect
+} from 'react-router-dom';
+
 import ContactspageView from './components/Contacts/ContactsPageView';
 import './reset.css';
 import './App.css';
@@ -12,18 +20,29 @@ import Footer from './components/Footer/footer';
 import ServiceLists from './components/ServiceList/ServiceLists';
 import Dashboard from './components/Dashboard/Dashboard';
 
-function App() {
+function App(props) {
+  const { login, contacts } = props;
   return (
     <div main-container>
       <Router>
         <Navigation />
         <div className="app-container">
+          {contacts ? (
+            <Route exact path="/" component={Dashboard} />
+          ) : (
+            <Redirect to="/contacts" />
+          )}
           <Switch>
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
-            <Route exact path="/contacts" component={ContactspageView} />
-            <Route exact path="/service_list" component={ServiceLists} />
-            <Route path="/" component={Dashboard} />
+            {!login ? (
+              <Redirect to="/signup" />
+            ) : (
+              <>
+                <Route exact path="/service_list" component={ServiceLists} />
+                <Route exact path="/contacts" component={ContactspageView} />
+              </>
+            )}
           </Switch>
         </div>
         <Footer />
@@ -32,4 +51,11 @@ function App() {
   );
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    login: state.auth.login,
+    contacts: localStorage.getItem('contacts')
+  };
+};
+
+export default connect(mapStateToProps)(App);

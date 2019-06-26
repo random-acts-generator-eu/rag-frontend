@@ -70,6 +70,9 @@ const fetchContacts = () => async dispatch => {
     const response = await axios.get(`${BASE_URL}/contacts`, {
       headers
     });
+    if (response.data.length > 0) {
+      localStorage.setItem('contacts', true);
+    }
     dispatch(getContacts(response.data));
   } catch (error) {
     dispatch(failure(error.message));
@@ -84,6 +87,9 @@ const deleteContact = contactID => async dispatch => {
     const response = await axios.delete(`${BASE_URL}/contacts/${contactID}`, {
       headers
     });
+    if (response.data.length === 0) {
+      localStorage.removeItem('contacts');
+    }
     dispatch(deletingContact(response.data));
   } catch (error) {
     dispatch(failure(error.message));

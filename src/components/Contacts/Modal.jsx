@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/destructuring-assignment */
 import React from 'react';
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
@@ -28,6 +29,14 @@ class ModalForm extends React.Component {
     });
   }
 
+  componentDidUpdate(_prevProps, _prevState) {
+    const { history } = this.props;
+    if (!this.state.modal) {
+      this.props.fetchContacts();
+      history.push('/contacts');
+    }
+  }
+
   changeHandler = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
@@ -53,14 +62,7 @@ class ModalForm extends React.Component {
   };
 
   render() {
-    const { history } = this.props;
-    if (!this.state.modal) {
-      this.props.fetchContacts();
-      history.push('/contacts');
-    }
-
     const { firstname, lastname } = this.state;
-
     return (
       <div>
         <Modal
@@ -84,8 +86,8 @@ class ModalForm extends React.Component {
                 <label htmlFor="lastname">Last Name</label>
                 <input
                   type="text"
-                  name="firstname"
-                  id="firstname"
+                  name="lastname"
+                  id="lastname"
                   value={lastname}
                   onChange={this.changeHandler}
                 />
@@ -127,7 +129,7 @@ class ModalForm extends React.Component {
                 onClick={event => this.submitHandler(event)}
               >
                 {' '}
-                contacts
+                Edit Contact
               </button>
             </form>
           </ModalBody>

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/destructuring-assignment */
 import React from 'react';
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
@@ -46,11 +47,6 @@ class ModalForm extends React.Component {
   };
 
   render() {
-    const { history } = this.props;
-    if (!this.state.modal) {
-      this.props.actsDispatcher();
-      history.push('/service_list');
-    }
     const header = 'Edit';
     const { description } = this.state;
 
