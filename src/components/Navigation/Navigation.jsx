@@ -8,7 +8,9 @@ const Navigation = props => {
   return (
     <NavContainer>
       <Logo>
-        <h2>Random Acts Generator</h2>
+        <h2>
+          <NavLink to="/">Random Acts Generator</NavLink>
+        </h2>
       </Logo>
       <Nav>
         {props.login ? (

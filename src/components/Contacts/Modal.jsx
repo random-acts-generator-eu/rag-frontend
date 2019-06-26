@@ -60,7 +60,6 @@ class ModalForm extends React.Component {
     }
 
     const { firstname, lastname } = this.state;
-    console.log(this.state);
     return (
       <div>
         <Modal

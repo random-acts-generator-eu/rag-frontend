@@ -15,9 +15,11 @@ class ContactList extends Component {
     const list = contacts || [];
     return (
       <Div>
-        {list.map(contact => (
-          <Contact key={contact._id} contact={contact} />
-        ))}
+        {list.length === 0 ? (
+          <h3>No Contacts</h3>
+        ) : (
+          list.map(contact => <Contact key={contact._id} contact={contact} />)
+        )}
       </Div>
     );
   }
