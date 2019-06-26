@@ -1,6 +1,13 @@
+/* eslint-disable react/destructuring-assignment */
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { connect } from 'react-redux';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect
+} from 'react-router-dom';
 import './reset.css';
 
 import Navigation from './components/Navigation/Navigation';
@@ -9,7 +16,7 @@ import Signup from './components/Signup/Signup';
 import Footer from './components/Footer/footer';
 import ServiceLists from './components/ServiceList/ServiceLists';
 
-function App() {
+function App(props) {
   return (
     <div>
       <Router>
@@ -17,7 +24,13 @@ function App() {
         <Switch>
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
-          <Route exact path="/service_list" component={ServiceLists} />
+          {!props.login ? (
+            <Redirect to="/signup" />
+          ) : (
+            <>
+              <Route exact path="/service_list" component={ServiceLists} />
+            </>
+          )}
         </Switch>
         <Footer />
       </Router>
@@ -25,4 +38,10 @@ function App() {
   );
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    login: state.auth.login
+  };
+};
+
+export default connect(mapStateToProps)(App);
