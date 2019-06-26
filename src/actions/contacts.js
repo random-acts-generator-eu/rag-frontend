@@ -70,6 +70,10 @@ const fetchContacts = () => async dispatch => {
     const response = await axios.get(`${BASE_URL}/contacts`, {
       headers
     });
+    if (response.data.length > 0) {
+      console.log(response.data);
+      localStorage.setItem('contacts', true);
+    }
     dispatch(getContacts(response.data));
   } catch (error) {
     dispatch(failure(error.message));

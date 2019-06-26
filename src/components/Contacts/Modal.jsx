@@ -60,7 +60,7 @@ class ModalForm extends React.Component {
     }
 
     const { firstname, lastname } = this.state;
-    console.log(this.props);
+    console.log(this.state);
     return (
       <div>
         <Modal
@@ -84,8 +84,8 @@ class ModalForm extends React.Component {
                 <label htmlFor="lastname">Last Name</label>
                 <input
                   type="text"
-                  name="firstname"
-                  id="firstname"
+                  name="lastname"
+                  id="lastname"
                   value={lastname}
                   onChange={this.changeHandler}
                 />
@@ -127,7 +127,7 @@ class ModalForm extends React.Component {
                 onClick={event => this.submitHandler(event)}
               >
                 {' '}
-                contacts
+                Edit Contact
               </button>
             </form>
           </ModalBody>

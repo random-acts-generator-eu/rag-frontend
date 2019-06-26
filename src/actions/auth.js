@@ -40,6 +40,9 @@ export const loginDispatcher = (email, password, history) => async dispatch => {
     const { contacts, acts } = response.data.user;
     dispatch(loggedIn(response.data.token));
     localStorage.setItem('token', response.data.token);
+    if (contacts.length > 0) {
+      localStorage.setItem('contacts', true);
+    }
     dispatch(contactsAction(contacts));
     dispatch(actsAction(acts));
     history.push('/');
