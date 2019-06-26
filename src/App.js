@@ -8,8 +8,9 @@ import {
   Route,
   Redirect
 } from 'react-router-dom';
-import './reset.css';
 
+import ContactspageView from './components/Contacts/ContactsPageView';
+import './reset.css';
 import Navigation from './components/Navigation/Navigation';
 import Login from './components/Login/Login';
 import Signup from './components/Signup/Signup';
@@ -31,6 +32,8 @@ function App(props) {
               <Route exact path="/service_list" component={ServiceLists} />
             </>
           )}
+          <Route exact path="/contacts" component={ContactspageView} />
+          <Route exact path="/service_list" component={ServiceLists} />
         </Switch>
         <Footer />
       </Router>

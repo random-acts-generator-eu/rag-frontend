@@ -45,6 +45,7 @@ export const Nav = styled.nav`
     position: relative;
     margin-left: 10%;
     box-sizing: border-box;
+    font-weight: 700;
 
     :before {
       content: '';

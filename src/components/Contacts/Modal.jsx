@@ -3,23 +3,26 @@ import React from 'react';
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 import { connect } from 'react-redux';
 
-import { editActsDispatcher, actsDispatcher } from '../../actions/acts';
+import { fetchContacts, editContact } from '../../actions/contacts';
 
 class ModalForm extends React.Component {
   state = {
     modal: true,
     backdrop: true,
-    description: '',
+    firstname: '',
+    lastname: '',
     level: ''
   };
 
   componentDidMount() {
-    const { acts } = this.props;
+    const { contacts } = this.props;
+
     const { id } = this.props.match.params;
-    acts.forEach(act => {
-      if (act._id === id) {
+    contacts.forEach(contact => {
+      if (contact._id === id) {
         this.setState({
-          description: act.description
+          firstname: contact.first_name,
+          lastname: contact.last_name
         });
       }
     });
@@ -36,24 +39,28 @@ class ModalForm extends React.Component {
   };
 
   submitHandler = () => {
-    this.setState({ modal: false });
-    const { description, level } = this.state;
-    const { history } = this.props;
+    const { firstname, lastname, level } = this.state;
     const { id } = this.props.match.params;
 
-    this.props.editActsDispatcher(description, level, id, history);
-    this.setState({ description: '', level: '' });
+    const contactDetails = {
+      firstname,
+      lastname,
+      level
+    };
+    this.props.editContact(id, contactDetails);
+    this.setState({ firstname: '', lastname: '', level: '' });
+    this.setState({ modal: false });
   };
 
   render() {
     const { history } = this.props;
     if (!this.state.modal) {
-      this.props.actsDispatcher();
-      history.push('/service_list');
+      this.props.fetchContacts();
+      history.push('/contacts');
     }
-    const header = 'Edit';
-    const { description } = this.state;
 
+    const { firstname, lastname } = this.state;
+    console.log(this.props);
     return (
       <div>
         <Modal
@@ -66,53 +73,61 @@ class ModalForm extends React.Component {
           <ModalBody>
             <form>
               <div>
-                <label htmlFor="description">Description</label>
-                <textarea
-                  name="description"
-                  cols="20"
-                  rows="10"
-                  placeholder="Enter description.."
-                  value={description}
+                <label htmlFor="firstname">First Name</label>
+                <input
+                  type="text"
+                  name="firstname"
+                  id="firstname"
+                  value={firstname}
                   onChange={this.changeHandler}
-                  required
+                />
+                <label htmlFor="lastname">Last Name</label>
+                <input
+                  type="text"
+                  name="firstname"
+                  id="firstname"
+                  value={lastname}
+                  onChange={this.changeHandler}
                 />
               </div>
               <div>
-                <label htmlFor="level">Level</label>
+                <p> How close are you guys? </p>
+                <label htmlFor="level">friend</label>
                 <section>
                   <input
                     type="radio"
                     name="level"
-                    value="easy"
+                    value="friend"
                     onChange={this.changeHandler}
                     required
                   />
-                  <label htmlFor="Easy">Easy</label>
+                  <label htmlFor="friend">Friend</label>
 
                   <input
                     type="radio"
                     name="level"
-                    value="medium"
+                    value="close friend"
                     onChange={this.changeHandler}
                     required
                   />
-                  <label htmlFor="medium">Medium</label>
+                  <label htmlFor="close friend">Close friend</label>
 
                   <input
                     type="radio"
                     name="level"
-                    value="hard"
+                    value="best friend"
                     onChange={this.changeHandler}
                     required
                   />
-                  <label htmlFor="hard">Hard</label>
+                  <label htmlFor="best friend">Best friend</label>
                 </section>
               </div>
               <button
                 type="button"
                 onClick={event => this.submitHandler(event)}
               >
-                {header} Act
+                {' '}
+                contacts
               </button>
             </form>
           </ModalBody>
@@ -124,11 +139,11 @@ class ModalForm extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    acts: state.act.acts || []
+    contacts: state.contacts.contacts || []
   };
 };
 
 export default connect(
   mapStateToProps,
-  { editActsDispatcher, actsDispatcher }
+  { fetchContacts, editContact }
 )(ModalForm);
