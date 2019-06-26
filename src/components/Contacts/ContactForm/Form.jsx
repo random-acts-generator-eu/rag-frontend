@@ -25,9 +25,26 @@ class Form extends Component {
       level
     };
     this.props.addContact(userDetails);
+    this.setState({ firstname: '', lastname: '', level: '' });
+  };
+
+  onEditContact = event => {
+    event.preventDefault();
+    const { firstname, lastname, level } = this.state;
+    // const { history } = this.props;
+    const { id } = this.props.match.params;
+
+    const contactDetails = {
+      firstName: firstname,
+      lastName: lastname,
+      level
+    };
+    this.props.editContact(id, contactDetails);
+    this.setState({ firstname: '', lastname: '', level: '' });
   };
 
   render() {
+    const { firstname, lastname } = this.state;
     return (
       <div>
         <form className="contact-form" onSubmit={this.onAddContact}>
@@ -40,6 +57,7 @@ class Form extends Component {
                 type="text"
                 name="firstname"
                 id="firstname"
+                value={firstname}
                 onChange={this.handleInputChange}
               />
             </div>
@@ -49,6 +67,7 @@ class Form extends Component {
                 type="text"
                 name="lastname"
                 id="lastname"
+                value={lastname}
                 onChange={this.handleInputChange}
               />
             </div>

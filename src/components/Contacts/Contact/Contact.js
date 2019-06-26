@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Div from './styled';
 import { deleteContact } from '../../../actions/contacts';
+import { Link } from 'react-router-dom';
 
 function Contact(props) {
   const { contact } = props;
@@ -11,7 +12,9 @@ function Contact(props) {
         Name: {contact.first_name} {contact.last_name}
       </p>
       <p>Closeness: {contact.level}</p>
-      <button type="submit">Edit</button>
+      <Link to={`/contacts/edit/${contact._id}`}>
+        <button type="submit">Edit</button>{' '}
+      </Link>
       <button type="submit" onClick={() => props.deleteContact(contact._id)}>
         delete
       </button>
