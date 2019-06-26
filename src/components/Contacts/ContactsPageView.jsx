@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import Modal from './Modal';
 import Form from './ContactForm/Form';
 import ContactList from './ContactList/ContactList';
 
@@ -11,8 +13,15 @@ const Div = styled.div`
 export default function ContactspageView() {
   return (
     <Div>
-      <ContactList />
-      <Form />
+      <Router>
+        <ContactList />
+        <Form />
+        <Route
+          exact
+          path="/contacts/edit/:id"
+          render={props => <Modal {...props} />}
+        />
+      </Router>
     </Div>
   );
 }

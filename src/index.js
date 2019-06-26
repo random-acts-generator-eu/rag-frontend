@@ -3,10 +3,11 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
 import thunk from 'redux-thunk';
-import App from './App';
+
 import authReducer from './reducers/auth';
 import contactReducer from './reducers/contact';
 import actsReducer from './reducers/acts';
+import App from './App';
 
 const rootReducer = combineReducers({
   auth: authReducer,
