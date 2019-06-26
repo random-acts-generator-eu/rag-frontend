@@ -33,16 +33,20 @@ const actsAction = payload => {
   };
 };
 
-export const loginDispatcher = (email, password, history) => async dispatch => {
+export const loginDispatcher = (email, password) => async dispatch => {
   dispatch(loading(true));
   try {
     const response = await axios.post(`${BASE_URL}/login`, { email, password });
     const { contacts, acts } = response.data.user;
     dispatch(loggedIn(response.data.token));
     localStorage.setItem('token', response.data.token);
+    if (contacts.length > 0) {
+      localStorage.setItem('contacts', true);
+    }
     dispatch(contactsAction(contacts));
     dispatch(actsAction(acts));
-    history.push('/');
+    // history.push('/');
+    window.location.href = '/';
   } catch (error) {
     dispatch(failure(error.message));
   } finally {
@@ -73,7 +77,7 @@ export const signupDispatcher = (
     localStorage.setItem('token', response.data.token);
     dispatch(contactsAction(contacts));
     dispatch(actsAction(acts));
-    history.push('/');
+    history.push('/contacts');
   } catch (error) {
     dispatch(failure(error.message));
   } finally {

@@ -51,6 +51,7 @@ const mapStateToProps = state => {
     loadingContact: state.contacts.contacts
   };
 };
+
 export default connect(
   mapStateToProps,
   { actsDispatcher, fetchContacts }
