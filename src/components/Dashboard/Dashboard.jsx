@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { actsDispatcher } from '../../actions/acts';
 import { fetchContacts } from '../../actions/contacts';
+import { Div, ActLevel, ButtonDiv, Contact } from './style';
 
 class Dashboard extends Component {
   state = {
@@ -31,15 +32,23 @@ class Dashboard extends Component {
   render() {
     const { act, contact } = this.state;
     return (
-      <div>
-        <p style={{ fontSize: '2rem' }}>{act.description}</p>
-        <p style={{ fontSize: '2rem' }}>{act.level}</p>
-        <p style={{ fontSize: '2rem' }}>
-          {contact.first_name} {contact.last_name}
-        </p>
-        <p style={{ fontSize: '2rem' }}>{contact.level}</p>
-        <button onClick={() => this.randomizeActs()}>Radonmize Act</button>
-      </div>
+      <Div>
+        <div>
+          <div>
+            <h2>{act.description}</h2>
+            <ActLevel>Difficulty: {act.level}</ActLevel>
+          </div>
+          <Contact>
+            <p>
+              {contact.first_name} {contact.last_name}
+            </p>
+            <p>Closenes: {contact.level}</p>
+          </Contact>
+          <ButtonDiv>
+            <button onClick={() => this.randomizeActs()}>Radonmize</button>
+          </ButtonDiv>
+        </div>
+      </Div>
     );
   }
 }

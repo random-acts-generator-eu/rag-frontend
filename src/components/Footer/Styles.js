@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-export const Div = styled.div`
-  min-height: 50px;
+export const Div = styled.footer`
+  height: 130px;
   color: white;
   display: flex;
   flex-direction: column;
@@ -10,6 +10,9 @@ export const Div = styled.div`
   justify-content: center;
   align-items: center;
   padding: 1rem;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
   h3 {
     font-weight: bold;
     font-size: 1.5rem;
