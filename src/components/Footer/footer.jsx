@@ -8,7 +8,7 @@ const Footer = () => {
       <h3>Random Acts Generator</h3>
       <div>
         <LinkStyle to="/contacts">Contact</LinkStyle>{' '}
-        <LinkStyle to="/service_list">Acts List</LinkStyle>{' '}
+        <LinkStyle to="/service_list">Acts</LinkStyle>{' '}
         <LinkStyle to="/">Profile</LinkStyle>
       </div>
       <p>&copy; Copyright 2019</p>

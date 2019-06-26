@@ -11,6 +11,8 @@ import {
 
 import ContactspageView from './components/Contacts/ContactsPageView';
 import './reset.css';
+import './App.css';
+
 import Navigation from './components/Navigation/Navigation';
 import Login from './components/Login/Login';
 import Signup from './components/Signup/Signup';
@@ -21,26 +23,28 @@ import Dashboard from './components/Dashboard/Dashboard';
 function App(props) {
   const { login, contacts } = props;
   return (
-    <div>
+    <div main-container>
       <Router>
         <Navigation />
-        {contacts ? (
-          <Route exact path="/" component={Dashboard} />
-        ) : (
-          <Redirect to="/contacts" />
-        )}
-        <Switch>
-          <Route path="/login" component={Login} />
-          <Route path="/signup" component={Signup} />
-          {!login ? (
-            <Redirect to="/signup" />
+        <div className="app-container">
+          {contacts ? (
+            <Route exact path="/" component={Dashboard} />
           ) : (
-            <>
-              <Route exact path="/service_list" component={ServiceLists} />
-              <Route exact path="/contacts" component={ContactspageView} />
-            </>
+            <Redirect to="/contacts" />
           )}
-        </Switch>
+          <Switch>
+            <Route path="/login" component={Login} />
+            <Route path="/signup" component={Signup} />
+            {!login ? (
+              <Redirect to="/signup" />
+            ) : (
+              <>
+                <Route exact path="/service_list" component={ServiceLists} />
+                <Route exact path="/contacts" component={ContactspageView} />
+              </>
+            )}
+          </Switch>
+        </div>
         <Footer />
       </Router>
     </div>

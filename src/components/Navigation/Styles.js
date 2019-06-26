@@ -29,7 +29,9 @@ export const Logo = styled.div`
   font-family: 'Quicksand', sans-serif;
   font-weight: 700;
   font-size: 25px;
-  color: white;
+  a {
+    color: white;
+  }
 `;
 
 export const Nav = styled.nav`
@@ -63,6 +65,3 @@ export const Nav = styled.nav`
     }
   }
 `;
-
-// transform: translateX(-50%), scaleX(0);
-// transform-origin: 50% 50%;
