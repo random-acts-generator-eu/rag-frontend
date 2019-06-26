@@ -6,9 +6,11 @@ import thunk from 'redux-thunk';
 import App from './App';
 import authReducer from './reducers/auth';
 import contactReducer from './reducers/contact';
+import actsReducer from './reducers/acts';
 
 const rootReducer = combineReducers({
   auth: authReducer,
+  act: actsReducer,
   contacts: contactReducer
 });
 
