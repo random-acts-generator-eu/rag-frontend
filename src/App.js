@@ -9,17 +9,20 @@ import Login from './components/Login/Login';
 import Signup from './components/Signup/Signup';
 import Footer from './components/Footer/footer';
 import ServiceLists from './components/ServiceList/ServiceLists';
+import Dashboard from './components/Dashboard/Dashboard';
 
 function App() {
   return (
     <div>
       <Router>
         <Navigation />
+
         <Switch>
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
           <Route exact path="/contacts" component={ContactspageView} />
           <Route exact path="/service_list" component={ServiceLists} />
+          <Route path="/" component={Dashboard} />
         </Switch>
         <Footer />
       </Router>
