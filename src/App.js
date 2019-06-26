@@ -18,10 +18,6 @@ function App() {
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
           <Route exact path="/service_list" component={ServiceLists} />
-          {/* <Route
-            path="/service_list/edit/:id"
-            render={props => <Forms {...props} header="Edit" />}
-          /> */}
         </Switch>
         <Footer />
       </Router>
