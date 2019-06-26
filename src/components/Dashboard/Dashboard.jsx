@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { actsDispatcher } from '../../actions/acts';
 import { fetchContacts } from '../../actions/contacts';
 import { Div, ActLevel, ButtonDiv, Contact } from './style';
+import '../../loader.css';
 
 class Dashboard extends Component {
   state = {
@@ -30,6 +31,9 @@ class Dashboard extends Component {
   };
 
   render() {
+    if (this.props.loadingAct && this.props.loadingContact) {
+      return <div className="loader">Loading...</div>;
+    }
     const { act, contact } = this.state;
     return (
       <Div>
@@ -42,10 +46,10 @@ class Dashboard extends Component {
             <p>
               {contact.first_name} {contact.last_name}
             </p>
-            <p>Closenes: {contact.level}</p>
+            <p>Closeness: {contact.level}</p>
           </Contact>
           <ButtonDiv>
-            <button onClick={() => this.randomizeActs()}>Radonmize</button>
+            <button onClick={() => this.randomizeActs()}>Randomize</button>
           </ButtonDiv>
         </div>
       </Div>
@@ -56,8 +60,8 @@ const mapStateToProps = state => {
   return {
     acts: state.act.acts,
     contacts: state.contacts.contacts,
-    loadingAct: state.act.acts,
-    loadingContact: state.contacts.contacts
+    loadingAct: state.act.loading,
+    loadingContact: state.contacts.loading
   };
 };
 
