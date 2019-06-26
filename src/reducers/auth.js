@@ -6,6 +6,7 @@ const initialState = {
   contacts: [],
   acts: [],
   login: !!localStorage.getItem('token'),
+  logout: false,
   errorMessage: null
 };
 
@@ -36,6 +37,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         error: action.payload
+      };
+    case types.LOGOUT:
+      return {
+        ...state,
+        logout: action.payload
       };
 
     default:
