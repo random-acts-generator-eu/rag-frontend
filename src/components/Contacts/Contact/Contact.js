@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import Div from './styled';
 import { deleteContact } from '../../../actions/contacts';
-import { Link } from 'react-router-dom';
 
 function Contact(props) {
   const { contact } = props;
