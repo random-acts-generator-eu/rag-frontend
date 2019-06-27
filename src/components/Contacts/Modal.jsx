@@ -50,19 +50,21 @@ class ModalForm extends React.Component {
   submitHandler = () => {
     const { firstname, lastname, level } = this.state;
     const { id } = this.props.match.params;
+    const { history } = this.props;
 
     const contactDetails = {
-      firstname,
-      lastname,
+      firstName: firstname,
+      lastName: lastname,
       level
     };
-    this.props.editContact(id, contactDetails);
+    this.props.editContact(id, contactDetails, history);
     this.setState({ firstname: '', lastname: '', level: '' });
-    this.setState({ modal: false });
+    this.props.fetchContacts();
   };
 
   render() {
     const { firstname, lastname } = this.state;
+    const { loading } = this.props;
     return (
       <div>
         <Modal
@@ -73,65 +75,69 @@ class ModalForm extends React.Component {
         >
           <ModalHeader toggle={this.toggle}>Edit Form</ModalHeader>
           <ModalBody>
-            <form>
-              <div>
-                <label htmlFor="firstname">First Name</label>
-                <input
-                  type="text"
-                  name="firstname"
-                  id="firstname"
-                  value={firstname}
-                  onChange={this.changeHandler}
-                />
-                <label htmlFor="lastname">Last Name</label>
-                <input
-                  type="text"
-                  name="lastname"
-                  id="lastname"
-                  value={lastname}
-                  onChange={this.changeHandler}
-                />
-              </div>
-              <div>
-                <p> How close are you guys? </p>
-                <label htmlFor="level">friend</label>
-                <section>
+            {loading ? (
+              <h1>Loading...</h1>
+            ) : (
+              <form>
+                <div>
+                  <label htmlFor="firstname">First Name</label>
                   <input
-                    type="radio"
-                    name="level"
-                    value="friend"
+                    type="text"
+                    name="firstname"
+                    id="firstname"
+                    value={firstname}
                     onChange={this.changeHandler}
-                    required
                   />
-                  <label htmlFor="friend">Friend</label>
+                  <label htmlFor="lastname">Last Name</label>
+                  <input
+                    type="text"
+                    name="lastname"
+                    id="lastname"
+                    value={lastname}
+                    onChange={this.changeHandler}
+                  />
+                </div>
+                <div>
+                  <p> How close are you guys? </p>
+                  <label htmlFor="level">friend</label>
+                  <section>
+                    <input
+                      type="radio"
+                      name="level"
+                      value="friend"
+                      onChange={this.changeHandler}
+                      required
+                    />
+                    <label htmlFor="friend">Friend</label>
 
-                  <input
-                    type="radio"
-                    name="level"
-                    value="close friend"
-                    onChange={this.changeHandler}
-                    required
-                  />
-                  <label htmlFor="close friend">Close friend</label>
+                    <input
+                      type="radio"
+                      name="level"
+                      value="close friend"
+                      onChange={this.changeHandler}
+                      required
+                    />
+                    <label htmlFor="close friend">Close friend</label>
 
-                  <input
-                    type="radio"
-                    name="level"
-                    value="best friend"
-                    onChange={this.changeHandler}
-                    required
-                  />
-                  <label htmlFor="best friend">Best friend</label>
-                </section>
-              </div>
-              <button
-                type="button"
-                onClick={event => this.submitHandler(event)}
-              >
-                {' '}
-                Edit Contact
-              </button>
-            </form>
+                    <input
+                      type="radio"
+                      name="level"
+                      value="best friend"
+                      onChange={this.changeHandler}
+                      required
+                    />
+                    <label htmlFor="best friend">Best friend</label>
+                  </section>
+                </div>
+                <button
+                  type="button"
+                  onClick={event => this.submitHandler(event)}
+                >
+                  {' '}
+                  Edit Contact
+                </button>
+              </form>
+            )}
           </ModalBody>
         </Modal>
       </div>
@@ -141,7 +147,8 @@ class ModalForm extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    contacts: state.contacts.contacts || []
+    contacts: state.contacts.contacts || [],
+    loading: state.contacts.loading
   };
 };
 

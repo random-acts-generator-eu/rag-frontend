@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 /* eslint-disable react/destructuring-assignment */
 /* react/jsx-boolean-value) */
 import 'bootstrap/dist/css/bootstrap.min.css';

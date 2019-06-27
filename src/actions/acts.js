@@ -65,7 +65,6 @@ export const deleteActsDispatcher = id => async dispatch => {
     const response = await axios.delete(`${BASE_URL}/${id}`, { headers });
     dispatch(deleteActsAction(response.data));
   } catch (error) {
-    console.log(error);
     dispatch(failure(error.message));
   } finally {
     dispatch(loading(false));
