@@ -4,12 +4,17 @@ const initialState = {
   contacts: [],
   loading: false,
   loadingContact: false,
-  error: ''
+  error: null
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.LOADING:
+      return {
+        ...state,
+        loading: action.payload
+      };
+    case actionTypes.LOADING_CONTACTS:
       return {
         ...state,
         loading: action.payload

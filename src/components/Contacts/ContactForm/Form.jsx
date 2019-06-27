@@ -1,6 +1,8 @@
 /* eslint-disable react/destructuring-assignment */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { toast } from 'react-toastify';
 import './style.css';
 import { addContact, editContact } from '../../../actions/contacts';
 
@@ -46,6 +48,10 @@ class Form extends Component {
   render() {
     const { firstname, lastname } = this.state;
     const { loading } = this.props;
+    const { error } = this.props;
+    if (error !== null) {
+      toast.error(' Invalid details');
+    }
     return loading ? (
       <div className="loader">Loading...</div>
     ) : (
@@ -62,6 +68,7 @@ class Form extends Component {
                 id="firstname"
                 value={firstname}
                 onChange={this.handleInputChange}
+                required
               />
             </div>
             <div className="input-box">
@@ -72,6 +79,7 @@ class Form extends Component {
                 id="lastname"
                 value={lastname}
                 onChange={this.handleInputChange}
+                required
               />
             </div>
 
@@ -84,6 +92,7 @@ class Form extends Component {
                   id="level"
                   value="friend"
                   onChange={this.handleInputChange}
+                  required
                 />
                 <label htmlFor="1">Friend</label>
               </div>
@@ -94,6 +103,7 @@ class Form extends Component {
                   id="level"
                   value="close friend"
                   onChange={this.handleInputChange}
+                  required
                 />
                 <label htmlFor="2">Close friend</label>
               </div>
@@ -118,9 +128,16 @@ class Form extends Component {
   }
 }
 
+Form.propType = {
+  addContact: PropTypes.func,
+  editContact: PropTypes.func,
+  id: PropTypes.string
+};
+
 const mapStateToProps = state => {
   return {
-    loading: state.contacts.loadingContact
+    loading: state.contacts.loadingContact,
+    error: state.contacts.error
   };
 };
 

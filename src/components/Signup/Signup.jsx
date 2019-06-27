@@ -1,7 +1,7 @@
 /* eslint-disable react/destructuring-assignment */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
+import { toast } from 'react-toastify';
 import { SignupForm, Form, SideNote, LinkStyle } from './Styles';
 import { signupDispatcher } from '../../actions/auth';
 
@@ -33,8 +33,18 @@ class Signup extends Component {
   };
 
   render() {
+    const { error } = this.props;
     const { email, password, firstName, lastName, phone } = this.state;
-    return (
+
+    if (error !== null) {
+      toast.error(
+        'Invalid credentials. Password should be 7 characters or more'
+      );
+    }
+
+    return this.props.loading ? (
+      <div className="loader">Loading...</div>
+    ) : (
       <SignupForm>
         <Form onSubmit={event => this.signupHandler(event)}>
           <h2>Join our community</h2>
@@ -110,7 +120,8 @@ class Signup extends Component {
 
 const mapStateToProps = state => {
   return {
-    state
+    error: state.auth.errorMessage,
+    loading: state.auth.loadingLogin
   };
 };
 export default connect(

@@ -14,6 +14,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         loading: action.payload
       };
+    case types.LOADING_ACTS:
+      return {
+        ...state,
+        loading: action.payload
+      };
     case types.ADD_ACTS_LOADING:
       return {
         ...state,
@@ -37,7 +42,7 @@ const reducer = (state = initialState, action) => {
     case types.FAILURE:
       return {
         ...state,
-        error: action.payload
+        errorMessage: action.payload
       };
 
     default:

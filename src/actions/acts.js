@@ -13,7 +13,7 @@ const loading = payload => {
     payload
   };
 };
-const loadingActs = payload => {
+const loadingAddActs = payload => {
   return {
     type: actionTypes.ADD_ACTS_LOADING,
     payload
@@ -53,15 +53,26 @@ const editActsAction = payload => {
   };
 };
 
+const loadingActs = payload => {
+  return {
+    type: actionTypes.LOADING_ACTS,
+    payload
+  };
+};
+
 export const actsDispatcher = () => async dispatch => {
-  dispatch(loading(true));
+  dispatch(loadingActs(true));
   try {
-    const response = await axios.get(BASE_URL, { headers });
+    const header = await {
+      Authorization: localStorage.getItem('token')
+    };
+    const response = await axios.get(BASE_URL, { headers: header });
     dispatch(actsAction(response.data));
   } catch (error) {
     dispatch(failure(error.message));
   } finally {
-    dispatch(loading(false));
+    dispatch(failure(null));
+    dispatch(loadingActs(false));
   }
 };
 
@@ -78,7 +89,7 @@ export const deleteActsDispatcher = id => async dispatch => {
 };
 
 export const addActsDispatcher = (description, level) => async dispatch => {
-  dispatch(loadingActs(true));
+  dispatch(loadingAddActs(true));
   try {
     const response = await axios.post(
       `${BASE_URL}`,
@@ -92,7 +103,8 @@ export const addActsDispatcher = (description, level) => async dispatch => {
   } catch (error) {
     dispatch(failure(error.message));
   } finally {
-    dispatch(loadingActs(false));
+    dispatch(failure(null));
+    dispatch(loadingAddActs(false));
   }
 };
 
@@ -113,10 +125,12 @@ export const editActsDispatcher = (
       { headers }
     );
     dispatch(editActsAction(response.data));
+    dispatch(actsDispatcher());
     history.push('/service_list');
   } catch (error) {
     dispatch(failure(error.message));
   } finally {
+    dispatch(failure(null));
     dispatch(loading(false));
   }
 };

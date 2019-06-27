@@ -1,7 +1,9 @@
+/* eslint-disable react/require-default-props */
 /* eslint-disable react/destructuring-assignment */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { toast } from 'react-toastify';
+import PropTypes from 'prop-types';
 
 import { LoginForm, Form, SideNote, LinkStyle } from './Styles';
 import { loginDispatcher } from '../../actions/auth';
@@ -25,16 +27,16 @@ class Login extends Component {
   };
 
   render() {
-    if (this.props.loading) {
-      return <div className="loader">Loading...</div>;
-    }
     const { error } = this.props;
+    const { email, password } = this.state;
 
     if (error !== null) {
       toast.error(' Incorrect username or password');
     }
-    const { email, password } = this.state;
-    return (
+
+    return this.props.loading ? (
+      <div className="loader">Loading...</div>
+    ) : (
       <LoginForm>
         <Form onSubmit={event => this.loginHandler(event)}>
           <h2>Welcome back,</h2>
@@ -72,11 +74,15 @@ class Login extends Component {
   }
 }
 
+Login.propTypes = {
+  loginDispatcher: PropTypes.func
+};
+
 const mapStateToProps = state => {
   return {
-    state,
     error: state.auth.errorMessage,
-    loading: state.auth.loading
+    loading: state.auth.loadingLogin,
+    login: state.auth.login
   };
 };
 export default connect(

@@ -7,7 +7,7 @@ import { actsDispatcher, deleteActsDispatcher } from '../../actions/acts';
 import ServiceList from './ServiceList';
 import Forms from './Forms';
 import ModalForm from './Modal';
-import { Cards } from './Styles';
+import { Cards, DivContainer } from './Styles';
 
 class ServiceLists extends Component {
   componentDidMount() {
@@ -16,7 +16,7 @@ class ServiceLists extends Component {
 
   render() {
     return (
-      <div>
+      <DivContainer>
         <Router>
           <Cards>
             {this.props.acts.map(act => (
@@ -33,7 +33,7 @@ class ServiceLists extends Component {
             render={props => <ModalForm {...props} header="Edit" />}
           />
         </Router>
-      </div>
+      </DivContainer>
     );
   }
 }

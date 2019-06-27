@@ -1,10 +1,13 @@
+/* eslint-disable react/require-default-props */
+
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import Div from './styled';
 import { deleteContact } from '../../../actions/contacts';
 
-function Contact(props) {
+const Contact = props => {
   const { contact } = props;
   return (
     <Div>
@@ -20,7 +23,13 @@ function Contact(props) {
       </button>
     </Div>
   );
-}
+};
+
+Contact.propTypes = {
+  first_name: PropTypes.string,
+  last_name: PropTypes.string,
+  level: PropTypes.string
+};
 
 export default connect(
   null,

@@ -2,6 +2,7 @@ import * as types from '../actions/actionTypes';
 
 const initialState = {
   loading: false,
+  loadingLogin: false,
   token: null,
   contacts: [],
   acts: [],
@@ -12,10 +13,10 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case types.LOADING:
+    case types.LOADING_LOGIN:
       return {
         ...state,
-        loading: action.payload
+        loadingLogin: action.payload
       };
     case types.LOGGED_IN:
       return {

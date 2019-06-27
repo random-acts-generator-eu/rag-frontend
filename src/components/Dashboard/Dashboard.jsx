@@ -1,13 +1,23 @@
+/* eslint-disable react/require-default-props */
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/button-has-type */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { actsDispatcher } from '../../actions/acts';
 import { fetchContacts } from '../../actions/contacts';
 import { Div, ActLevel, ButtonDiv, Contact } from './style';
 import '../../loader.css';
 
 class Dashboard extends Component {
+  // constructor(props) {
+  //   super(props);
+
+  //   this.props.actsDispatcher();
+  //   this.props.fetchContacts();
+  //   this.randomizeActs();
+
+  // }
   state = {
     act: {},
     contact: {}
@@ -16,7 +26,7 @@ class Dashboard extends Component {
   async componentDidMount() {
     await this.props.actsDispatcher();
     await this.props.fetchContacts();
-    this.randomizeActs();
+    await this.randomizeActs();
   }
 
   randomizeActs = () => {
@@ -31,10 +41,15 @@ class Dashboard extends Component {
   };
 
   render() {
-    if (this.props.loadingAct && this.props.loadingContact) {
+    const { act, contact } = this.state;
+    //  const { acts, contacts } = this.props;
+
+    if (this.props.loadingAct || this.props.loadingContact) {
       return <div className="loader">Loading...</div>;
     }
-    const { act, contact } = this.state;
+    // if (acts.length === 0 && contacts.length === 0) {
+    //   return <div className="loader">Loading...</div>;
+    // }
     return (
       <Div>
         <div>
@@ -56,6 +71,16 @@ class Dashboard extends Component {
     );
   }
 }
+
+Dashboard.propTypes = {
+  acts: PropTypes.arrayOf(PropTypes.object),
+  contacts: PropTypes.arrayOf(PropTypes.object),
+  actsDispatcher: PropTypes.func,
+  fetchContacts: PropTypes.func,
+  loadingAct: PropTypes.bool,
+  loadingContact: PropTypes.bool
+};
+
 const mapStateToProps = state => {
   return {
     acts: state.act.acts,

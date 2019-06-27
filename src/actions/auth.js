@@ -4,7 +4,7 @@ import * as actionTypes from './actionTypes';
 const BASE_URL = `https://rag-eu.herokuapp.com/auth`;
 const loading = payload => {
   return {
-    type: actionTypes.LOADING,
+    type: actionTypes.LOADING_LOGIN,
     payload
   };
 };
@@ -33,23 +33,25 @@ const actsAction = payload => {
   };
 };
 
-export const loginDispatcher = (email, password) => async dispatch => {
+export const loginDispatcher = (email, password, history) => async dispatch => {
   dispatch(loading(true));
   try {
     const response = await axios.post(`${BASE_URL}/login`, { email, password });
-    const { contacts, acts } = response.data.user;
-    dispatch(loggedIn(response.data.token));
+    const { contacts } = response.data.user;
+
+    await dispatch(loggedIn(response.data.token));
     localStorage.setItem('token', response.data.token);
     if (contacts.length > 0) {
       localStorage.setItem('contacts', true);
     }
-    dispatch(contactsAction(contacts));
-    dispatch(actsAction(acts));
-    // history.push('/');
-    window.location.href = '/';
+
+    history.push('/');
+
+    dispatch(loading(false));
   } catch (error) {
     dispatch(failure(error.message));
   } finally {
+    dispatch(failure(null));
     dispatch(loading(false));
   }
 };
@@ -81,6 +83,7 @@ export const signupDispatcher = (
   } catch (error) {
     dispatch(failure(error.message));
   } finally {
+    dispatch(failure(null));
     dispatch(loading(false));
   }
 };
