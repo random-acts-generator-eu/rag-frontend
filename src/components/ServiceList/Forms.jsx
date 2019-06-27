@@ -24,41 +24,11 @@ class Forms extends Component {
     this.setState({ description: '', level: '' });
   };
 
-  editHandler = event => {
-    event.preventDefault();
-    const { description, level } = this.state;
-    const { history } = this.props;
-    const { id } = this.props.match.params;
-
-    this.props.editActsDispatcher(description, level, id, history);
-    this.setState({ description: '', level: '' });
-  };
-
-  componentDidMount() {
-    const { header, acts } = this.props;
-    if (header === 'Edit') {
-      const { id } = this.props.match.params;
-      acts.forEach(act => {
-        if (act._id === id) {
-          this.setState({
-            description: act.description
-          });
-        }
-      });
-    }
-  }
-
   render() {
     const { description } = this.state;
     const { header } = this.props;
     return (
-      <Form
-        onSubmit={
-          header === 'Edit'
-            ? event => this.editHandler(event)
-            : event => this.addHandler(event)
-        }
-      >
+      <Form onSubmit={event => this.addHandler(event)}>
         <h2>{header} act</h2>
         <div>
           <label htmlFor="description">Description</label>
