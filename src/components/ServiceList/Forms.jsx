@@ -26,10 +26,13 @@ class Forms extends Component {
 
   render() {
     const { description } = this.state;
-    const { header } = this.props;
-    return (
+    const { loading } = this.props;
+
+    return loading ? (
+      <div className="loader">Loading...</div>
+    ) : (
       <Form onSubmit={event => this.addHandler(event)}>
-        <h2>{header} act</h2>
+        <h2>Add act</h2>
         <div>
           <label htmlFor="description">Description</label>
           <textarea
@@ -73,7 +76,7 @@ class Forms extends Component {
             <label htmlFor="hard">Hard</label>
           </section>
         </div>
-        <button type="submit">{header} Act</button>
+        <button type="submit">Add Act</button>
       </Form>
     );
   }
@@ -81,7 +84,8 @@ class Forms extends Component {
 
 const mapStateToProps = state => {
   return {
-    acts: state.act.acts
+    acts: state.act.acts,
+    loading: state.act.loadingActs
   };
 };
 export default connect(

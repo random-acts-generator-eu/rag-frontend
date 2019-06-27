@@ -13,6 +13,12 @@ const loading = payload => {
     payload
   };
 };
+const loadingActs = payload => {
+  return {
+    type: actionTypes.ADD_ACTS_LOADING,
+    payload
+  };
+};
 
 const failure = payload => {
   return {
@@ -72,7 +78,7 @@ export const deleteActsDispatcher = id => async dispatch => {
 };
 
 export const addActsDispatcher = (description, level) => async dispatch => {
-  dispatch(loading(true));
+  dispatch(loadingActs(true));
   try {
     const response = await axios.post(
       `${BASE_URL}`,
@@ -86,7 +92,7 @@ export const addActsDispatcher = (description, level) => async dispatch => {
   } catch (error) {
     dispatch(failure(error.message));
   } finally {
-    dispatch(loading(false));
+    dispatch(loadingActs(false));
   }
 };
 

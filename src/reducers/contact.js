@@ -3,6 +3,7 @@ import * as actionTypes from '../actions/actionTypes';
 const initialState = {
   contacts: [],
   loading: false,
+  loadingContact: false,
   error: ''
 };
 
@@ -12,6 +13,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         loading: action.payload
+      };
+    case actionTypes.ADD_CONTACTS_LOADING:
+      return {
+        ...state,
+        loadingContact: action.payload
       };
     case actionTypes.FAILURE:
       return {

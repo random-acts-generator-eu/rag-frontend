@@ -2,6 +2,7 @@ import * as types from '../actions/actionTypes';
 
 const initialState = {
   loading: false,
+  loadingActs: false,
   acts: [],
   errorMessage: null
 };
@@ -12,6 +13,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         loading: action.payload
+      };
+    case types.ADD_ACTS_LOADING:
+      return {
+        ...state,
+        loadingActs: action.payload
       };
     case types.GET_ACTS:
       return {
