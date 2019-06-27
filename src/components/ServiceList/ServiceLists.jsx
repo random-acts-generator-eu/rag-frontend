@@ -8,12 +8,17 @@ import { actsDispatcher, deleteActsDispatcher } from '../../actions/acts';
 import ServiceList from './ServiceList';
 import Forms from './Form';
 import ModalForm from './Modal';
-import { Cards } from './Styles';
+// import { Cards } from './Styles';
+import Div, { Table, TableDiv } from '../Contacts/ContactList/styled';
 
-const Div = styled.div`
+const ContentDiv = styled.div`
   display: flex;
   width: 100%;
   margin-top: 3%;
+  @media (max-width: 850px) {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 class ServiceLists extends Component {
@@ -24,28 +29,41 @@ class ServiceLists extends Component {
   render() {
     const { acts } = this.props;
     return (
-      <Div>
+      <ContentDiv>
         <Router>
-          <Cards>
-            {acts.length === 0 ? (
-              <h3>No Acts, Pls add one</h3>
-            ) : (
-              this.props.acts.map(act => (
-                <ServiceList
-                  key={act._id}
-                  act={act}
-                  deleteHandler={this.props.deleteActsDispatcher}
-                />
-              ))
-            )}
-          </Cards>
+          <Div>
+            <TableDiv>
+              <Table>
+                <thead>
+                  <tr>
+                    <th>Description</th>
+                    <th>Level</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {acts.length === 0 ? (
+                    <h3>No Acts, Pls add one</h3>
+                  ) : (
+                    this.props.acts.map(act => (
+                      <ServiceList
+                        key={act._id}
+                        act={act}
+                        deleteHandler={this.props.deleteActsDispatcher}
+                      />
+                    ))
+                  )}
+                </tbody>
+              </Table>
+            </TableDiv>
+          </Div>
           <Forms header="Add" />
           <Route
             path="/service_list/edit/:id"
             render={props => <ModalForm {...props} header="Edit" />}
           />
         </Router>
-      </Div>
+      </ContentDiv>
     );
   }
 }

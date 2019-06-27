@@ -5,6 +5,8 @@ import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 import { connect } from 'react-redux';
 import { toast } from 'react-toastify';
 
+import { InputDiv, RadioInput, BtnContainer } from './Styles';
+
 import { editActsDispatcher, actsDispatcher } from '../../actions/acts';
 
 class ModalForm extends React.Component {
@@ -70,13 +72,15 @@ class ModalForm extends React.Component {
           className={this.props.className}
           backdrop={this.state.backdrop}
         >
-          <ModalHeader toggle={this.toggle}>Edit Form</ModalHeader>
+          <ModalHeader toggle={this.toggle}>
+            Edit Act of services Idea
+          </ModalHeader>
           {loading ? (
             <div className="loader">Loading...</div>
           ) : (
             <ModalBody>
               <form>
-                <div>
+                <InputDiv>
                   <label htmlFor="description">Description</label>
                   <textarea
                     name="description"
@@ -87,8 +91,8 @@ class ModalForm extends React.Component {
                     onChange={this.changeHandler}
                     required
                   />
-                </div>
-                <div>
+                </InputDiv>
+                <RadioInput>
                   <label htmlFor="level">Level</label>
                   <section>
                     <input
@@ -118,13 +122,16 @@ class ModalForm extends React.Component {
                     />
                     <label htmlFor="hard">Hard</label>
                   </section>
-                </div>
-                <button
-                  type="button"
-                  onClick={event => this.submitHandler(event)}
-                >
-                  Edit Act
-                </button>
+                </RadioInput>
+                <BtnContainer>
+                  <button
+                    className="contact-btn"
+                    type="button"
+                    onClick={event => this.submitHandler(event)}
+                  >
+                    Edit Act
+                  </button>
+                </BtnContainer>
               </form>
             </ModalBody>
           )}
