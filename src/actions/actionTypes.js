@@ -13,3 +13,4 @@ export const ADD_ACTS = 'ADD_ACTS';
 export const GET_ACTS = 'GET_ACTS';
 export const DELETE_ACTS = 'DELETE_ACTS';
 export const EDIT_ACTS = 'EDIT_ACTS';
+export const LOGOUT = 'LOGOUT';

@@ -1,9 +1,11 @@
 /* eslint-disable react/destructuring-assignment */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { toast } from 'react-toastify';
 
 import { LoginForm, Form, SideNote, LinkStyle } from './Styles';
 import { loginDispatcher } from '../../actions/auth';
+import '../../loader.css';
 
 class Login extends Component {
   state = {
@@ -23,6 +25,14 @@ class Login extends Component {
   };
 
   render() {
+    if (this.props.loading) {
+      return <div className="loader">Loading...</div>;
+    }
+    const { error } = this.props;
+
+    if (error !== null) {
+      toast.error(' Incorrect username or password');
+    }
     const { email, password } = this.state;
     return (
       <LoginForm>
@@ -64,7 +74,9 @@ class Login extends Component {
 
 const mapStateToProps = state => {
   return {
-    state
+    state,
+    error: state.auth.errorMessage,
+    loading: state.auth.loading
   };
 };
 export default connect(

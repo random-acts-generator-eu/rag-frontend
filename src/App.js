@@ -1,4 +1,5 @@
 /* eslint-disable react/destructuring-assignment */
+/* react/jsx-boolean-value) */
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import { connect } from 'react-redux';
@@ -8,6 +9,9 @@ import {
   Route,
   Redirect
 } from 'react-router-dom';
+
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
 
 import ContactspageView from './components/Contacts/ContactsPageView';
 import './reset.css';
@@ -44,6 +48,11 @@ function App(props) {
               </>
             )}
           </Switch>
+          <ToastContainer
+            autoClose={3000}
+            position="top-right"
+            hideProgressBar
+          />
         </div>
         <Footer />
       </Router>

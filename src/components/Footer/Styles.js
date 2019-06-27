@@ -10,7 +10,6 @@ export const Div = styled.footer`
   justify-content: center;
   align-items: center;
   padding: 1rem;
-  position: absolute;
   bottom: 0;
   width: 100%;
   h3 {
