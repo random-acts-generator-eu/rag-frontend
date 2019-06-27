@@ -56,13 +56,12 @@ class Form extends Component {
     return loading ? (
       <div className="loader">Loading...</div>
     ) : (
-      <div>
+      <div className="form-container">
         <form className="contact-form" onSubmit={this.onAddContact}>
           <h2> Add a New Contact to Your List</h2>
 
           <div className="input-field">
             <div className="input-box">
-              <label htmlFor="firstname">First Name</label>
               <input
                 type="text"
                 name="firstname"
@@ -70,10 +69,10 @@ class Form extends Component {
                 value={firstname}
                 onChange={this.handleInputChange}
                 required
+                placeholder="Enter firstname"
               />
             </div>
             <div className="input-box">
-              <label htmlFor="lastname">Last Name</label>
               <input
                 type="text"
                 name="lastname"
@@ -81,12 +80,13 @@ class Form extends Component {
                 value={lastname}
                 onChange={this.handleInputChange}
                 required
+                placeholder="Enter lastname"
               />
             </div>
 
             <div className="radio-form">
               <p> How close are you guys? </p>
-              <div>
+              <div className="radio">
                 <input
                   type="radio"
                   name="level"
@@ -97,7 +97,7 @@ class Form extends Component {
                 />
                 <label htmlFor="1">Friend</label>
               </div>
-              <div>
+              <div className="radio">
                 <input
                   type="radio"
                   name="level"
@@ -108,19 +108,21 @@ class Form extends Component {
                 />
                 <label htmlFor="2">Close friend</label>
               </div>
-              <div />
-              <input
-                type="radio"
-                name="level"
-                id="level"
-                value="best friend"
-                onChange={this.handleInputChange}
-              />
-              <label htmlFor="3">Best friend</label>
-            </div>
-
-            <div>
-              <button type="submit">Add Contact</button>
+              <div className="radio">
+                <input
+                  type="radio"
+                  name="level"
+                  id="level"
+                  value="best friend"
+                  onChange={this.handleInputChange}
+                />
+                <label htmlFor="3">Best friend</label>
+              </div>
+              <div className="contact-btn-container">
+                <button className="contact-btn" type="submit">
+                  Add Contact
+                </button>
+              </div>
             </div>
           </div>
         </form>

@@ -2,12 +2,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import styled from 'styled-components';
 
 import { actsDispatcher, deleteActsDispatcher } from '../../actions/acts';
 import ServiceList from './ServiceList';
-import Forms from './Forms';
+import Forms from './Form';
 import ModalForm from './Modal';
-import { Cards, DivContainer } from './Styles';
+import { Cards } from './Styles';
+
+const Div = styled.div`
+  display: flex;
+  width: 100%;
+  margin-top: 3%;
+`;
 
 class ServiceLists extends Component {
   componentDidMount() {
@@ -17,7 +24,7 @@ class ServiceLists extends Component {
   render() {
     const { acts } = this.props;
     return (
-      <DivContainer>
+      <Div>
         <Router>
           <Cards>
             {acts.length === 0 ? (
@@ -38,7 +45,7 @@ class ServiceLists extends Component {
             render={props => <ModalForm {...props} header="Edit" />}
           />
         </Router>
-      </DivContainer>
+      </Div>
     );
   }
 }

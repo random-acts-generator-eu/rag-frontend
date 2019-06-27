@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { toast } from 'react-toastify';
 
 import { Form } from './Styles';
+import '../Contacts/ContactForm/style.css';
 import { addActsDispatcher, editActsDispatcher } from '../../actions/acts';
 
 class Forms extends Component {

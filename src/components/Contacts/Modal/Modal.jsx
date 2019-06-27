@@ -5,7 +5,8 @@ import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 import { connect } from 'react-redux';
 import { toast } from 'react-toastify';
 
-import { fetchContacts, editContact } from '../../actions/contacts';
+import './Modal.css';
+import { fetchContacts, editContact } from '../../../actions/contacts';
 
 class ModalForm extends React.Component {
   state = {
@@ -74,69 +75,81 @@ class ModalForm extends React.Component {
           className={this.props.className}
           backdrop={this.state.backdrop}
         >
-          <ModalHeader toggle={this.toggle}>Edit Form</ModalHeader>
+          <ModalHeader toggle={this.toggle}>Edit Contact Details</ModalHeader>
           <ModalBody>
             {loading ? (
               <div className="loader">Loading...</div>
             ) : (
               <form>
-                <div>
-                  <label htmlFor="firstname">First Name</label>
-                  <input
-                    type="text"
-                    name="firstname"
-                    id="firstname"
-                    value={firstname}
-                    onChange={this.changeHandler}
-                  />
-                  <label htmlFor="lastname">Last Name</label>
-                  <input
-                    type="text"
-                    name="lastname"
-                    id="lastname"
-                    value={lastname}
-                    onChange={this.changeHandler}
-                  />
-                </div>
-                <div>
-                  <p> How close are you guys? </p>
-                  <label htmlFor="level">friend</label>
-                  <section>
+                <div className="input-field">
+                  <div className="input-box">
                     <input
-                      type="radio"
-                      name="level"
-                      value="friend"
+                      type="text"
+                      name="firstname"
+                      id="firstname"
+                      value={firstname}
                       onChange={this.changeHandler}
-                      required
+                      placeholder="Enter firstname"
                     />
-                    <label htmlFor="friend">Friend</label>
+                  </div>
+                  <div className="input-box">
+                    <input
+                      type="text"
+                      name="lastname"
+                      id="lastname"
+                      value={lastname}
+                      onChange={this.changeHandler}
+                      placeholder="Enter lastname"
+                    />
+                  </div>
+                  <div className="radio-form">
+                    <p> How close are you guys? </p>
 
-                    <input
-                      type="radio"
-                      name="level"
-                      value="close friend"
-                      onChange={this.changeHandler}
-                      required
-                    />
-                    <label htmlFor="close friend">Close friend</label>
+                    <div className="radio">
+                      <input
+                        type="radio"
+                        name="level"
+                        id="level"
+                        value="friend"
+                        onChange={this.changeHandler}
+                        required
+                      />
+                      <label htmlFor="friend">Friend</label>
+                    </div>
 
-                    <input
-                      type="radio"
-                      name="level"
-                      value="best friend"
-                      onChange={this.changeHandler}
-                      required
-                    />
-                    <label htmlFor="best friend">Best friend</label>
-                  </section>
+                    <div className="radio">
+                      <input
+                        type="radio"
+                        name="level"
+                        id="level"
+                        value="close friend"
+                        onChange={this.changeHandler}
+                        required
+                      />
+                      <label htmlFor="close friend">Close friend</label>
+                    </div>
+
+                    <div className="radio">
+                      <input
+                        type="radio"
+                        name="level"
+                        id="level"
+                        value="best friend"
+                        onChange={this.changeHandler}
+                      />
+                      <label htmlFor="best friend">Best friend</label>
+                    </div>
+                  </div>
+                  <div className="contact-btn-container">
+                    <button
+                      className="contact-btn"
+                      type="button"
+                      onClick={event => this.submitHandler(event)}
+                    >
+                      Edit Contact
+                    </button>
+                  </div>
                 </div>
-                <button
-                  type="button"
-                  onClick={event => this.submitHandler(event)}
-                >
-                  {' '}
-                  Edit Contact
-                </button>
               </form>
             )}
           </ModalBody>
