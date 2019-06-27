@@ -82,9 +82,13 @@ export const Form = styled.form`
     font-size: 1.2rem;
     border-radius: 15px;
     cursor: pointer;
+    outline: none;
     &:hover {
       box-shadow: 0px 8px 12px 2px rgba(0, 0, 0, 0.15);
       color: #eeeeee;
+    }
+    &:focus {
+      outline: 0;
     }
   }
 `;

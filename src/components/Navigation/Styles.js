@@ -7,21 +7,7 @@ export const NavContainer = styled.div`
   height: 70px;
   box-sizing: border-box;
   padding: 20px;
-  background-image: linear-gradient(
-    to right top,
-    #6a0f49,
-    #7b2f6b,
-    #884b8e,
-    #9267b1,
-    #9984d3,
-    #968adb,
-    #9290e2,
-    #8e96e9,
-    #8386d8,
-    #7976c7,
-    #6e66b7,
-    #6457a6
-  );
+  background-color: #835bd8;
 `;
 
 export const Nav = styled.nav`
