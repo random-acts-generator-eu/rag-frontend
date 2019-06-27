@@ -3,10 +3,6 @@ import * as actionTypes from './actionTypes';
 
 const BASE_URL = `https://rag-eu.herokuapp.com/acts`;
 
-const headers = {
-  Authorization: localStorage.getItem('token')
-};
-
 const loading = payload => {
   return {
     type: actionTypes.LOADING,
@@ -62,11 +58,11 @@ const loadingActs = payload => {
 
 export const actsDispatcher = () => async dispatch => {
   dispatch(loadingActs(true));
+  const headers = await {
+    Authorization: localStorage.getItem('token')
+  };
   try {
-    const header = await {
-      Authorization: localStorage.getItem('token')
-    };
-    const response = await axios.get(BASE_URL, { headers: header });
+    const response = await axios.get(BASE_URL, { headers });
     dispatch(actsAction(response.data));
   } catch (error) {
     dispatch(failure(error.message));
@@ -78,6 +74,9 @@ export const actsDispatcher = () => async dispatch => {
 
 export const deleteActsDispatcher = id => async dispatch => {
   dispatch(loading(true));
+  const headers = await {
+    Authorization: localStorage.getItem('token')
+  };
   try {
     const response = await axios.delete(`${BASE_URL}/${id}`, { headers });
     dispatch(deleteActsAction(response.data));
@@ -90,6 +89,9 @@ export const deleteActsDispatcher = id => async dispatch => {
 
 export const addActsDispatcher = (description, level) => async dispatch => {
   dispatch(loadingAddActs(true));
+  const headers = await {
+    Authorization: localStorage.getItem('token')
+  };
   try {
     const response = await axios.post(
       `${BASE_URL}`,
@@ -115,6 +117,9 @@ export const editActsDispatcher = (
   history
 ) => async dispatch => {
   dispatch(loading(true));
+  const headers = await {
+    Authorization: localStorage.getItem('token')
+  };
   try {
     const response = await axios.put(
       `${BASE_URL}/${id}`,

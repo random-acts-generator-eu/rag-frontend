@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable react/destructuring-assignment */
 import React from 'react';
 import { NavLink } from 'react-router-dom';
@@ -6,12 +8,13 @@ import { NavContainer, Logo, Nav } from './Styles';
 import userLogout from '../../actions/logout';
 
 const Navigation = props => {
+  const homePageLink = () => {
+    window.location.href = '/';
+  };
   return (
     <NavContainer>
       <Logo>
-        <h2>
-          <NavLink to="/">Random Acts Generator</NavLink>
-        </h2>
+        <h2 onClick={() => homePageLink()}> Random Acts Generator</h2>
       </Logo>
       <Nav>
         {props.login ? (
