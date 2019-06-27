@@ -106,11 +106,24 @@ class Signup extends Component {
           <button type="submit">Signup</button>
         </Form>
         <SideNote>
-          <h3>New Here?</h3>
           <p>
-            One of us? If you already has an account, just sign in. We have
-            missed you!
+            <strong>Random Acts Generator</strong> is an app that reminds users
+            to perform an act of service to someone on their contact list and
+            also provides ideas for the user to perform in situations where they
+            can’t come up with one.
           </p>
+
+          <p>
+            The best way to find yourself is to lose yourself in the service of
+            others
+          </p>
+
+          <section>
+            <h3>One of us?</h3>
+            <p>
+              If you already has an account, just sign in. We have missed you!
+            </p>
+          </section>
           <LinkStyle to="/login">Login</LinkStyle>
         </SideNote>
       </SignupForm>

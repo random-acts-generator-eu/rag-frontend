@@ -436,6 +436,18 @@ fieldset {
 
 textarea {
   resize: vertical;
+  /* color:     #6a0f4957;
+  background-image: linear-gradient(
+    to right top,
+    #6d084873,
+    #7907606c,
+    #73097c36,
+    #5d079b52,
+    #4b1fc36c,
+    #968adb7e,
+    #9190e259,
+    #8e96e967
+  );  */
 }
 
 .chromeframe {

@@ -24,16 +24,6 @@ export const NavContainer = styled.div`
   );
 `;
 
-export const Logo = styled.div`
-  width: 50%;
-  font-family: 'Quicksand', sans-serif;
-  font-weight: 700;
-  font-size: 25px;
-  a {
-    color: white;
-  }
-`;
-
 export const Nav = styled.nav`
   width: 50%;
   font-family: 'Quicksand', sans-serif;
@@ -63,5 +53,28 @@ export const Nav = styled.nav`
       width: 100%;
       transform: translateY(100%);
     }
+  }
+`;
+
+export const Logo = styled.div`
+  cursor: pointer;
+  width: 50%;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+  font-size: 25px;
+  color: white;
+  :before {
+    content: '';
+    position: absolute;
+    top: 100%;
+    bottom: 0;
+    background: white;
+    width: 0%;
+    transition: 0.5s;
+    height: 3px;
+  }
+  :hover:before {
+    width: 100%;
+    transform: translateY(100%);
   }
 `;
