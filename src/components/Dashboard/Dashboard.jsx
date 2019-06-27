@@ -24,7 +24,6 @@ class Dashboard extends Component {
   };
 
   async componentDidMount() {
-    console.log('ComponentDid');
     await this.props.actsDispatcher();
     await this.props.fetchContacts();
     await this.randomizeActs();
@@ -39,7 +38,6 @@ class Dashboard extends Component {
       act: randAct,
       contact: randContact
     });
-    console.log(this.props);
   };
 
   render() {

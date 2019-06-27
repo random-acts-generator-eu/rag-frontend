@@ -3,6 +3,7 @@
 import React from 'react';
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 import { connect } from 'react-redux';
+import { toast } from 'react-toastify';
 
 import { fetchContacts, editContact } from '../../actions/contacts';
 

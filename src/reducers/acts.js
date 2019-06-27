@@ -42,7 +42,7 @@ const reducer = (state = initialState, action) => {
     case types.FAILURE:
       return {
         ...state,
-        error: action.payload
+        errorMessage: action.payload
       };
 
     default:

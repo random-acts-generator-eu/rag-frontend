@@ -4,7 +4,7 @@ const initialState = {
   contacts: [],
   loading: false,
   loadingContact: false,
-  error: ''
+  error: null
 };
 
 const reducer = (state = initialState, action) => {

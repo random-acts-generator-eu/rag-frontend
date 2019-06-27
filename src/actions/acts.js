@@ -103,7 +103,8 @@ export const addActsDispatcher = (description, level) => async dispatch => {
   } catch (error) {
     dispatch(failure(error.message));
   } finally {
-    dispatch(loadingActs(false));
+    dispatch(failure(null));
+    dispatch(loadingAddActs(false));
   }
 };
 
@@ -124,10 +125,12 @@ export const editActsDispatcher = (
       { headers }
     );
     dispatch(editActsAction(response.data));
+    dispatch(actsDispatcher());
     history.push('/service_list');
   } catch (error) {
     dispatch(failure(error.message));
   } finally {
+    dispatch(failure(null));
     dispatch(loading(false));
   }
 };

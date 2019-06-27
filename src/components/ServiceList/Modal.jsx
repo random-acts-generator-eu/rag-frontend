@@ -3,6 +3,7 @@
 import React from 'react';
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 import { connect } from 'react-redux';
+import { toast } from 'react-toastify';
 
 import { editActsDispatcher, actsDispatcher } from '../../actions/acts';
 
@@ -57,6 +58,10 @@ class ModalForm extends React.Component {
   render() {
     const { description } = this.state;
     const { loading } = this.props;
+    const { error } = this.props;
+    if (error !== null) {
+      toast.error(' Invalid details');
+    }
     return (
       <div>
         <Modal
@@ -133,7 +138,8 @@ class ModalForm extends React.Component {
 const mapStateToProps = state => {
   return {
     acts: state.act.acts || [],
-    loading: state.act.loading
+    loading: state.act.loading,
+    error: state.act.errorMessage
   };
 };
 

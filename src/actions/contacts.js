@@ -73,6 +73,7 @@ const addContact = contactDetails => async dispatch => {
   } catch (error) {
     dispatch(failure(error.message));
   } finally {
+    dispatch(failure(null));
     dispatch(loadingAdd(false));
   }
 };
@@ -93,6 +94,7 @@ const fetchContacts = () => async dispatch => {
   } catch (error) {
     dispatch(failure(error.message));
   } finally {
+    dispatch(failure(null));
     dispatch(loadingContact(false));
   }
 };
@@ -110,6 +112,7 @@ const deleteContact = contactID => async dispatch => {
   } catch (error) {
     dispatch(failure(error.message));
   } finally {
+    dispatch(failure(null));
     dispatch(loading(false));
   }
 };
@@ -129,6 +132,7 @@ const editContact = (contactID, contactDetails, history) => async dispatch => {
   } catch (error) {
     dispatch(failure(error.message));
   } finally {
+    dispatch(failure(null));
     dispatch(loading(false));
   }
 };

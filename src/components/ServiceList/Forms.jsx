@@ -3,7 +3,7 @@
 /* eslint-disable react/destructuring-assignment */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import { toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 import { Form } from './Styles';
 import { addActsDispatcher, editActsDispatcher } from '../../actions/acts';
@@ -26,9 +26,10 @@ class Forms extends Component {
   };
 
   render() {
-    // if (error !== null) {
-    //   toast.error(' Incorrect username or password');
-    // }
+    const { error } = this.props;
+    if (error !== null) {
+      toast.error(' Invalid details');
+    }
 
     const { description } = this.state;
     const { loading } = this.props;
@@ -90,7 +91,8 @@ class Forms extends Component {
 const mapStateToProps = state => {
   return {
     acts: state.act.acts,
-    loading: state.act.loadingActs
+    loading: state.act.loadingActs,
+    error: state.act.errorMessage
   };
 };
 export default connect(
