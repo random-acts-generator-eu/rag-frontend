@@ -23,7 +23,7 @@ import Dashboard from './components/Dashboard/Dashboard';
 function App(props) {
   const { login, contacts } = props;
   return (
-    <div main-container>
+    <div>
       <Router>
         <Navigation />
         <div className="app-container">

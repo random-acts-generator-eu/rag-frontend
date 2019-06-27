@@ -3,6 +3,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { NavContainer, Logo, Nav } from './Styles';
+import userLogout from '../../actions/logout';
 
 const Navigation = props => {
   return (
@@ -18,6 +19,9 @@ const Navigation = props => {
             <NavLink to="/service_list">Acts</NavLink>
             <NavLink exact to="/contacts">
               Contacts
+            </NavLink>
+            <NavLink exact to="/signup" onClick={props.userLogout}>
+              Logout
             </NavLink>
           </>
         ) : (
@@ -37,4 +41,7 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(Navigation);
+export default connect(
+  mapStateToProps,
+  { userLogout }
+)(Navigation);
