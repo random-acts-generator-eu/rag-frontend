@@ -14,6 +14,13 @@ const loading = payload => {
   };
 };
 
+const loadingContact = payload => {
+  return {
+    type: actionTypes.LOADING_CONTACTS,
+    payload
+  };
+};
+
 const newContact = payload => {
   return {
     type: actionTypes.FETCH_CONTACTS,
@@ -65,10 +72,13 @@ const addContact = contactDetails => async dispatch => {
 };
 
 const fetchContacts = () => async dispatch => {
-  dispatch(loading(true));
+  dispatch(loadingContact(true));
+  const header = await {
+    Authorization: localStorage.getItem('token')
+  };
   try {
     const response = await axios.get(`${BASE_URL}/contacts`, {
-      headers
+      headers: header
     });
     if (response.data.length > 0) {
       localStorage.setItem('contacts', true);
@@ -77,7 +87,7 @@ const fetchContacts = () => async dispatch => {
   } catch (error) {
     dispatch(failure(error.message));
   } finally {
-    dispatch(loading(false));
+    dispatch(loadingContact(false));
   }
 };
 

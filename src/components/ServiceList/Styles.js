@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const Cards = styled.div`
   display: flex;
   flex-wrap: wrap;
+  width: 70%;
 `;
 
 export const Card = styled.div`
@@ -65,4 +66,9 @@ export const Form = styled.form`
     border-radius: 10px;
     cursor: pointer;
   }
+`;
+
+export const DivContainer = styled.div`
+  display: flex;
+  width: 100%;
 `;

@@ -47,15 +47,26 @@ const editActsAction = payload => {
   };
 };
 
+const loadingActs = payload => {
+  return {
+    type: actionTypes.LOADING_ACTS,
+    payload
+  };
+};
+
 export const actsDispatcher = () => async dispatch => {
-  dispatch(loading(true));
+  dispatch(loadingActs(true));
   try {
-    const response = await axios.get(BASE_URL, { headers });
+    const header = await {
+      Authorization: localStorage.getItem('token')
+    };
+    const response = await axios.get(BASE_URL, { headers: header });
     dispatch(actsAction(response.data));
   } catch (error) {
     dispatch(failure(error.message));
   } finally {
-    dispatch(loading(false));
+    dispatch(failure(null));
+    dispatch(loadingActs(false));
   }
 };
 
@@ -65,7 +76,6 @@ export const deleteActsDispatcher = id => async dispatch => {
     const response = await axios.delete(`${BASE_URL}s/${id}`, { headers });
     dispatch(deleteActsAction(response.data));
   } catch (error) {
-    console.log(error);
     dispatch(failure(error.message));
   } finally {
     dispatch(loading(false));

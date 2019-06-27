@@ -10,7 +10,7 @@ const logout = payload => {
 const userLogout = () => dispatch => {
   dispatch(logout(true));
   localStorage.removeItem('token');
-  //   window.location.replace('/login');
+  window.location.replace('/signup');
 };
 
 export default userLogout;

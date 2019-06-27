@@ -13,6 +13,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         loading: action.payload
       };
+    case types.LOADING_ACTS:
+      return {
+        ...state,
+        loading: action.payload
+      };
     case types.GET_ACTS:
       return {
         ...state,

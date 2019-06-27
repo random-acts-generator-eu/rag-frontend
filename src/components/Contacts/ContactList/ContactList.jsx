@@ -1,6 +1,8 @@
+/* eslint-disable react/require-default-props */
 /* eslint-disable react/destructuring-assignment */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { fetchContacts } from '../../../actions/contacts';
 import Contact from '../Contact/Contact';
 import Div from './styled';
@@ -29,6 +31,11 @@ const mapStateToProps = state => {
   return {
     contacts: state.contacts.contacts
   };
+};
+
+ContactList.propTypes = {
+  contacts: PropTypes.arrayOf(PropTypes.object),
+  fetchContacts: PropTypes.func
 };
 
 export default connect(

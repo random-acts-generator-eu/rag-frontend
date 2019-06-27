@@ -1,6 +1,7 @@
 /* eslint-disable react/destructuring-assignment */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import './style.css';
 import { addContact, editContact } from '../../../actions/contacts';
 
@@ -114,6 +115,12 @@ class Form extends Component {
     );
   }
 }
+
+Form.propType = {
+  addContact: PropTypes.func,
+  editContact: PropTypes.func,
+  id: PropTypes.string
+};
 
 export default connect(
   null,
