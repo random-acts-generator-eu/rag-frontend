@@ -4,6 +4,6 @@ body {
 }
 
 .app-container {
-  min-height: 100%;
+  min-height: 77vh;
   position: relative;
 }

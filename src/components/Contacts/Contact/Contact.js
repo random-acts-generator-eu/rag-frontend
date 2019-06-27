@@ -1,27 +1,31 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react/require-default-props */
 
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import Div from './styled';
+// import Div from './styled';
 import { deleteContact } from '../../../actions/contacts';
 
 const Contact = props => {
   const { contact } = props;
   return (
-    <Div>
-      <p>
-        Name: {contact.first_name} {contact.last_name}
-      </p>
-      <p>Closeness: {contact.level}</p>
-      <Link to={`/contacts/edit/${contact._id}`}>
-        <button type="submit">Edit</button>{' '}
-      </Link>
-      <button type="submit" onClick={() => props.deleteContact(contact._id)}>
-        delete
-      </button>
-    </Div>
+    <tr>
+      <td>{contact.first_name}</td>
+      <td>{contact.last_name}</td>
+      <td>{contact.level}</td>
+      <td>
+        <Link to={`/contacts/edit/${contact._id}`}>
+          <i className="fas fa-user-edit" />
+        </Link>
+        <i
+          className="fas fa-trash-alt"
+          onClick={() => props.deleteContact(contact._id)}
+        />
+      </td>
+    </tr>
   );
 };
 

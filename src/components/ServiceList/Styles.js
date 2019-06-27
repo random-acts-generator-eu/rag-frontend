@@ -72,3 +72,8 @@ export const DivContainer = styled.div`
   display: flex;
   width: 100%;
 `;
+
+export const TableDiv = styled.div`
+  width: 90%;
+  margin: 0 auto;
+`;

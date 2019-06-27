@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { fetchContacts } from '../../../actions/contacts';
 import Contact from '../Contact/Contact';
-import Div from './styled';
+import Div, { Table, TableDiv } from './styled';
 
 class ContactList extends Component {
   componentDidMount() {
@@ -17,11 +17,27 @@ class ContactList extends Component {
     const list = contacts || [];
     return (
       <Div>
-        {list.length === 0 ? (
-          <h3>No Contacts</h3>
-        ) : (
-          list.map(contact => <Contact key={contact._id} contact={contact} />)
-        )}
+        <TableDiv>
+          <Table>
+            <thead>
+              <tr>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>closeness</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {list.length === 0 ? (
+                <h3>No Contacts</h3>
+              ) : (
+                list.map(contact => (
+                  <Contact key={contact._id} contact={contact} />
+                ))
+              )}
+            </tbody>
+          </Table>
+        </TableDiv>
       </Div>
     );
   }
