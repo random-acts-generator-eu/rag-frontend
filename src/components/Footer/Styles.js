@@ -6,7 +6,7 @@ export const Div = styled.footer`
   color: white;
   display: flex;
   flex-direction: column;
-  background-color: #101524;
+  background-color: rgb(99, 75, 154);
   justify-content: center;
   align-items: center;
   padding: 1rem;

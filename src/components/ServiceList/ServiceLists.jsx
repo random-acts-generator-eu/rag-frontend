@@ -22,17 +22,22 @@ class ServiceLists extends Component {
   }
 
   render() {
+    const { acts } = this.props;
     return (
       <Div>
         <Router>
           <Cards>
-            {this.props.acts.map(act => (
-              <ServiceList
-                key={act._id}
-                act={act}
-                deleteHandler={this.props.deleteActsDispatcher}
-              />
-            ))}
+            {acts.length === 0 ? (
+              <h3>No Acts, Pls add one</h3>
+            ) : (
+              this.props.acts.map(act => (
+                <ServiceList
+                  key={act._id}
+                  act={act}
+                  deleteHandler={this.props.deleteActsDispatcher}
+                />
+              ))
+            )}
           </Cards>
           <Forms header="Add" />
           <Route

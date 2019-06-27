@@ -10,14 +10,6 @@ import { Div, ActLevel, ButtonDiv, Contact } from './style';
 import '../../loader.css';
 
 class Dashboard extends Component {
-  // constructor(props) {
-  //   super(props);
-
-  //   this.props.actsDispatcher();
-  //   this.props.fetchContacts();
-  //   this.randomizeActs();
-
-  // }
   state = {
     act: {},
     contact: {}
@@ -42,14 +34,14 @@ class Dashboard extends Component {
 
   render() {
     const { act, contact } = this.state;
-    //  const { acts, contacts } = this.props;
+    const { contacts } = this.props;
 
     if (this.props.loadingAct || this.props.loadingContact) {
       return <div className="loader">Loading...</div>;
     }
-    // if (acts.length === 0 && contacts.length === 0) {
-    //   return <div className="loader">Loading...</div>;
-    // }
+    if (contacts.length === 0) {
+      return <div>Pls, add at least one contact to randomize acts</div>;
+    }
     return (
       <Div>
         <div>

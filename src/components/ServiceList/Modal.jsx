@@ -75,7 +75,6 @@ class ModalForm extends React.Component {
             <div className="loader">Loading...</div>
           ) : (
             <ModalBody>
-              debugger
               <form>
                 <div>
                   <label htmlFor="description">Description</label>

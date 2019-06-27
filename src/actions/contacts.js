@@ -3,10 +3,6 @@ import * as actionTypes from './actionTypes';
 
 const BASE_URL = `https://rag-eu.herokuapp.com`;
 
-const headers = {
-  Authorization: localStorage.getItem('token')
-};
-
 const loading = payload => {
   return {
     type: actionTypes.LOADING,
@@ -63,12 +59,18 @@ const editingContact = payload => {
 };
 
 const addContact = contactDetails => async dispatch => {
+  const headers = await {
+    Authorization: localStorage.getItem('token')
+  };
   dispatch(loadingAdd(true));
   try {
     const response = await axios.post(`${BASE_URL}/contacts`, contactDetails, {
       headers
     });
     const contactsData = response.data;
+    if (contactsData.length > 0) {
+      localStorage.setItem('contacts', true);
+    }
     dispatch(newContact(contactsData));
   } catch (error) {
     dispatch(failure(error.message));
@@ -80,12 +82,12 @@ const addContact = contactDetails => async dispatch => {
 
 const fetchContacts = () => async dispatch => {
   dispatch(loadingContact(true));
-  const header = await {
+  const headers = await {
     Authorization: localStorage.getItem('token')
   };
   try {
     const response = await axios.get(`${BASE_URL}/contacts`, {
-      headers: header
+      headers
     });
     if (response.data.length > 0) {
       localStorage.setItem('contacts', true);
@@ -101,6 +103,9 @@ const fetchContacts = () => async dispatch => {
 
 const deleteContact = contactID => async dispatch => {
   dispatch(loading(true));
+  const headers = await {
+    Authorization: localStorage.getItem('token')
+  };
   try {
     const response = await axios.delete(`${BASE_URL}/contacts/${contactID}`, {
       headers
@@ -119,6 +124,9 @@ const deleteContact = contactID => async dispatch => {
 
 const editContact = (contactID, contactDetails, history) => async dispatch => {
   dispatch(loading(true));
+  const headers = await {
+    Authorization: localStorage.getItem('token')
+  };
   try {
     const response = await axios.put(
       `${BASE_URL}/contacts/${contactID}`,
