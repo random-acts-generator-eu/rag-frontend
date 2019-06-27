@@ -25,46 +25,19 @@ class Forms extends Component {
     this.setState({ description: '', level: '' });
   };
 
-  editHandler = event => {
-    event.preventDefault();
-    const { description, level } = this.state;
-    const { history } = this.props;
-    const { id } = this.props.match.params;
-
-    this.props.editActsDispatcher(description, level, id, history);
-    this.setState({ description: '', level: '' });
-  };
-
-  componentDidMount() {
-    const { header, acts } = this.props;
-    if (header === 'Edit') {
-      const { id } = this.props.match.params;
-      acts.forEach(act => {
-        if (act._id === id) {
-          this.setState({
-            description: act.description
-          });
-        }
-      });
-    }
-  }
-
   render() {
     // if (error !== null) {
     //   toast.error(' Incorrect username or password');
     // }
 
     const { description } = this.state;
-    const { header } = this.props;
-    return (
-      <Form
-        onSubmit={
-          header === 'Edit'
-            ? event => this.editHandler(event)
-            : event => this.addHandler(event)
-        }
-      >
-        <h2>{header} act</h2>
+    const { loading } = this.props;
+
+    return loading ? (
+      <div className="loader">Loading...</div>
+    ) : (
+      <Form onSubmit={event => this.addHandler(event)}>
+        <h2>Add act</h2>
         <div>
           <label htmlFor="description">Description</label>
           <textarea
@@ -108,7 +81,7 @@ class Forms extends Component {
             <label htmlFor="hard">Hard</label>
           </section>
         </div>
-        <button type="submit">{header} Act</button>
+        <button type="submit">Add Act</button>
       </Form>
     );
   }
@@ -116,7 +89,8 @@ class Forms extends Component {
 
 const mapStateToProps = state => {
   return {
-    acts: state.act.acts
+    acts: state.act.acts,
+    loading: state.act.loadingActs
   };
 };
 export default connect(

@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 /* eslint-disable react/destructuring-assignment */
 /* react/jsx-boolean-value) */
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -27,7 +28,7 @@ import Dashboard from './components/Dashboard/Dashboard';
 function App(props) {
   const { login, contacts } = props;
   return (
-    <div>
+    <div main-container="true">
       <Router>
         <Navigation />
         <div className="app-container">

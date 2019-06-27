@@ -46,7 +46,10 @@ class Form extends Component {
 
   render() {
     const { firstname, lastname } = this.state;
-    return (
+    const { loading } = this.props;
+    return loading ? (
+      <div className="loader">Loading...</div>
+    ) : (
       <div>
         <form className="contact-form" onSubmit={this.onAddContact}>
           <h2> Add a New Contact to Your List</h2>
@@ -122,7 +125,13 @@ Form.propType = {
   id: PropTypes.string
 };
 
+const mapStateToProps = state => {
+  return {
+    loading: state.contacts.loadingContact
+  };
+};
+
 export default connect(
-  null,
+  mapStateToProps,
   { addContact, editContact }
 )(Form);

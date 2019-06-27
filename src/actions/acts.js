@@ -13,6 +13,12 @@ const loading = payload => {
     payload
   };
 };
+const loadingAddActs = payload => {
+  return {
+    type: actionTypes.ADD_ACTS_LOADING,
+    payload
+  };
+};
 
 const failure = payload => {
   return {
@@ -73,7 +79,7 @@ export const actsDispatcher = () => async dispatch => {
 export const deleteActsDispatcher = id => async dispatch => {
   dispatch(loading(true));
   try {
-    const response = await axios.delete(`${BASE_URL}s/${id}`, { headers });
+    const response = await axios.delete(`${BASE_URL}/${id}`, { headers });
     dispatch(deleteActsAction(response.data));
   } catch (error) {
     dispatch(failure(error.message));
@@ -83,7 +89,7 @@ export const deleteActsDispatcher = id => async dispatch => {
 };
 
 export const addActsDispatcher = (description, level) => async dispatch => {
-  dispatch(loading(true));
+  dispatch(loadingAddActs(true));
   try {
     const response = await axios.post(
       `${BASE_URL}`,
@@ -97,7 +103,7 @@ export const addActsDispatcher = (description, level) => async dispatch => {
   } catch (error) {
     dispatch(failure(error.message));
   } finally {
-    dispatch(loading(false));
+    dispatch(loadingActs(false));
   }
 };
 

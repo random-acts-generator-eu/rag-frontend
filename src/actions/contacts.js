@@ -13,6 +13,12 @@ const loading = payload => {
     payload
   };
 };
+const loadingAdd = payload => {
+  return {
+    type: actionTypes.ADD_CONTACTS_LOADING,
+    payload
+  };
+};
 
 const loadingContact = payload => {
   return {
@@ -57,7 +63,7 @@ const editingContact = payload => {
 };
 
 const addContact = contactDetails => async dispatch => {
-  dispatch(loading(true));
+  dispatch(loadingAdd(true));
   try {
     const response = await axios.post(`${BASE_URL}/contacts`, contactDetails, {
       headers
@@ -67,7 +73,7 @@ const addContact = contactDetails => async dispatch => {
   } catch (error) {
     dispatch(failure(error.message));
   } finally {
-    dispatch(loading(false));
+    dispatch(loadingAdd(false));
   }
 };
 
@@ -108,7 +114,7 @@ const deleteContact = contactID => async dispatch => {
   }
 };
 
-const editContact = (contactID, contactDetails) => async dispatch => {
+const editContact = (contactID, contactDetails, history) => async dispatch => {
   dispatch(loading(true));
   try {
     const response = await axios.put(
@@ -119,6 +125,7 @@ const editContact = (contactID, contactDetails) => async dispatch => {
       }
     );
     dispatch(editingContact(response.data));
+    history.push('/contacts');
   } catch (error) {
     dispatch(failure(error.message));
   } finally {
