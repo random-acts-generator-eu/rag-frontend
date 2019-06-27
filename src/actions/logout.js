@@ -11,7 +11,7 @@ const userLogout = () => dispatch => {
   dispatch(logout(true));
   localStorage.removeItem('token');
   localStorage.removeItem('contact');
-  window.location.href('/signup');
+  window.location.href = '/signup';
 };
 
 export default userLogout;

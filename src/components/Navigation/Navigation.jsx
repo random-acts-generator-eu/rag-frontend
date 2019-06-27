@@ -20,7 +20,7 @@ const Navigation = props => {
             <NavLink exact to="/contacts">
               Contacts
             </NavLink>
-            <NavLink exact to="/signup" onClick={props.userLogout}>
+            <NavLink exact to="" onClick={props.userLogout}>
               Logout
             </NavLink>
           </>
