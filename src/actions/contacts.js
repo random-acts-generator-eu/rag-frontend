@@ -98,7 +98,7 @@ const deleteContact = contactID => async dispatch => {
   }
 };
 
-const editContact = (contactID, contactDetails) => async dispatch => {
+const editContact = (contactID, contactDetails, history) => async dispatch => {
   dispatch(loading(true));
   try {
     const response = await axios.put(
@@ -109,6 +109,7 @@ const editContact = (contactID, contactDetails) => async dispatch => {
       }
     );
     dispatch(editingContact(response.data));
+    history.push('/contacts');
   } catch (error) {
     dispatch(failure(error.message));
   } finally {

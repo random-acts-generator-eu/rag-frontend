@@ -26,6 +26,14 @@ class ModalForm extends React.Component {
     });
   }
 
+  componentDidUpdate(_prevProps, _prevState) {
+    const { history } = this.props;
+    if (!this.state.modal) {
+      this.props.actsDispatcher();
+      history.push('/service_list');
+    }
+  }
+
   changeHandler = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
@@ -37,19 +45,18 @@ class ModalForm extends React.Component {
   };
 
   submitHandler = () => {
-    this.setState({ modal: false });
     const { description, level } = this.state;
     const { history } = this.props;
     const { id } = this.props.match.params;
 
     this.props.editActsDispatcher(description, level, id, history);
     this.setState({ description: '', level: '' });
+    this.props.actsDispatcher();
   };
 
   render() {
-    const header = 'Edit';
     const { description } = this.state;
-
+    const { loading } = this.props;
     return (
       <div>
         <Modal
@@ -59,59 +66,64 @@ class ModalForm extends React.Component {
           backdrop={this.state.backdrop}
         >
           <ModalHeader toggle={this.toggle}>Edit Form</ModalHeader>
-          <ModalBody>
-            <form>
-              <div>
-                <label htmlFor="description">Description</label>
-                <textarea
-                  name="description"
-                  cols="20"
-                  rows="10"
-                  placeholder="Enter description.."
-                  value={description}
-                  onChange={this.changeHandler}
-                  required
-                />
-              </div>
-              <div>
-                <label htmlFor="level">Level</label>
-                <section>
-                  <input
-                    type="radio"
-                    name="level"
-                    value="easy"
+          {loading ? (
+            <h1>Loading...</h1>
+          ) : (
+            <ModalBody>
+              debugger
+              <form>
+                <div>
+                  <label htmlFor="description">Description</label>
+                  <textarea
+                    name="description"
+                    cols="20"
+                    rows="10"
+                    placeholder="Enter description.."
+                    value={description}
                     onChange={this.changeHandler}
                     required
                   />
-                  <label htmlFor="Easy">Easy</label>
+                </div>
+                <div>
+                  <label htmlFor="level">Level</label>
+                  <section>
+                    <input
+                      type="radio"
+                      name="level"
+                      value="easy"
+                      onChange={this.changeHandler}
+                      required
+                    />
+                    <label htmlFor="Easy">Easy</label>
 
-                  <input
-                    type="radio"
-                    name="level"
-                    value="medium"
-                    onChange={this.changeHandler}
-                    required
-                  />
-                  <label htmlFor="medium">Medium</label>
+                    <input
+                      type="radio"
+                      name="level"
+                      value="medium"
+                      onChange={this.changeHandler}
+                      required
+                    />
+                    <label htmlFor="medium">Medium</label>
 
-                  <input
-                    type="radio"
-                    name="level"
-                    value="hard"
-                    onChange={this.changeHandler}
-                    required
-                  />
-                  <label htmlFor="hard">Hard</label>
-                </section>
-              </div>
-              <button
-                type="button"
-                onClick={event => this.submitHandler(event)}
-              >
-                {header} Act
-              </button>
-            </form>
-          </ModalBody>
+                    <input
+                      type="radio"
+                      name="level"
+                      value="hard"
+                      onChange={this.changeHandler}
+                      required
+                    />
+                    <label htmlFor="hard">Hard</label>
+                  </section>
+                </div>
+                <button
+                  type="button"
+                  onClick={event => this.submitHandler(event)}
+                >
+                  Edit Act
+                </button>
+              </form>
+            </ModalBody>
+          )}
         </Modal>
       </div>
     );
@@ -120,7 +132,8 @@ class ModalForm extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    acts: state.act.acts || []
+    acts: state.act.acts || [],
+    loading: state.act.loading
   };
 };
 
