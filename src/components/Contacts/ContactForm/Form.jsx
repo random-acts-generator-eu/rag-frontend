@@ -49,7 +49,6 @@ class Form extends Component {
     const { firstname, lastname } = this.state;
     const { loading } = this.props;
     const { error } = this.props;
-    console.log(error);
     if (error !== null) {
       toast.error(' Invalid details');
     }

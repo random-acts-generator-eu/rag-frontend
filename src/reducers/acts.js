@@ -17,7 +17,7 @@ const reducer = (state = initialState, action) => {
     case types.LOADING_ACTS:
       return {
         ...state,
-        loading: action.payload
+        loadingActs: action.payload
       };
     case types.ADD_ACTS_LOADING:
       return {
