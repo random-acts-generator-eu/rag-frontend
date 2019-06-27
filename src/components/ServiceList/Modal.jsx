@@ -67,7 +67,7 @@ class ModalForm extends React.Component {
         >
           <ModalHeader toggle={this.toggle}>Edit Form</ModalHeader>
           {loading ? (
-            <h1>Loading...</h1>
+            <div className="loader">Loading...</div>
           ) : (
             <ModalBody>
               debugger
