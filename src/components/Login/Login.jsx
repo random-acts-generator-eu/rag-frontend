@@ -39,13 +39,13 @@ class Login extends Component {
     ) : (
       <LoginForm>
         <Form onSubmit={event => this.loginHandler(event)}>
-          <h2>Welcome back,</h2>
+          <h2>Welcome back</h2>
           <div>
             <label htmlFor="Email">Email Address</label>
             <input
               name="email"
               type="email"
-              placeholder="Enter username"
+              placeholder="username"
               value={email}
               onChange={this.changeHandler}
               required
@@ -56,7 +56,7 @@ class Login extends Component {
             <input
               name="password"
               type="password"
-              placeholder="Enter password"
+              placeholder="password"
               value={password}
               onChange={this.changeHandler}
               required

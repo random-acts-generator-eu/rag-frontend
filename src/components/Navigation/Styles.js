@@ -63,4 +63,9 @@ export const Logo = styled.div`
     width: 100%;
     transform: translateY(100%);
   }
+  h2 {
+    @media (max-width: 800px) {
+      font-size: 1rem;
+    }
+  }
 `;

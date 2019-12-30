@@ -53,7 +53,7 @@ class Signup extends Component {
             <input
               name="firstName"
               type="text"
-              placeholder="Enter firstName"
+              placeholder="firstName"
               value={firstName}
               onChange={this.changeHandler}
               required
@@ -64,7 +64,7 @@ class Signup extends Component {
             <input
               name="lastName"
               type="name"
-              placeholder="Enter lastName"
+              placeholder="lastName"
               value={lastName}
               onChange={this.changeHandler}
               required
@@ -75,7 +75,7 @@ class Signup extends Component {
             <input
               name="email"
               type="email"
-              placeholder="Enter email address"
+              placeholder="email address"
               value={email}
               onChange={this.changeHandler}
               required
@@ -86,7 +86,7 @@ class Signup extends Component {
             <input
               name="phone"
               type="phone"
-              placeholder="Enter phone"
+              placeholder="phone"
               value={phone}
               onChange={this.changeHandler}
               required
@@ -97,7 +97,7 @@ class Signup extends Component {
             <input
               name="password"
               type="password"
-              placeholder="Enter password"
+              placeholder="password"
               value={password}
               onChange={this.changeHandler}
               required

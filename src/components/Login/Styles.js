@@ -6,8 +6,8 @@ import sideImage from '../../assets/sideImage.jpg';
 export const LoginForm = styled.div`
   box-shadow: 0px 8px 12px 2px rgba(0, 0, 0, 0.15);
   width: 70%;
-  height: 70vh;
   margin: 5rem auto;
+  height: 70vh;
   display: flex;
   box-sizing: border-box;
   flex-direction: row-reverse;
@@ -16,6 +16,8 @@ export const LoginForm = styled.div`
     display: flex;
     flex-direction: column-reverse;
     height: auto;
+    width: 90%;
+    margin: 2rem auto;
   }
 `;
 export const Form = styled.form`
@@ -27,24 +29,33 @@ export const Form = styled.form`
   padding: 4rem;
   margin: 0 auto;
   align-items: center;
-
   @media (max-width: 800px) {
     width: 100%;
   }
+
   h2 {
     font-size: 2rem;
     padding: 1rem;
     margin-bottom: 2rem;
     color: #6a0f4973;
+    @media (max-width: 800px) {
+      font-size: 1.3rem;
+    }
   }
   div {
     width: 80%;
     display: flex;
     flex-direction: column;
+    @media (max-width: 800px) {
+      width: 100%;
+    }
     label {
       text-transform: uppercase;
       color: #a8a9af;
       margin-bottom: 0.5rem;
+      @media (max-width: 800px) {
+        font-size: .8rem;
+      }
     }
     input {
       width: 100%;
@@ -55,7 +66,6 @@ export const Form = styled.form`
       border: none;
       border-bottom: 1px solid black;
       font-weight: bold;
-
       &:focus {
         border-bottom: 1px solid #6a0f4973;
       }
@@ -82,13 +92,17 @@ export const Form = styled.form`
     font-size: 1.2rem;
     border-radius: 15px;
     cursor: pointer;
-    outline: none;
     &:hover {
       box-shadow: 0px 8px 12px 2px rgba(0, 0, 0, 0.15);
       color: #eeeeee;
     }
     &:focus {
       outline: 0;
+    }
+    @media (max-width: 800px) {
+      width: 100%;
+      padding: .5rem .6rem;
+      border-radius: 5px;
     }
   }
 `;
@@ -119,6 +133,7 @@ export const SideNote = styled.div`
   @media (max-width: 800px) {
     width: 100%;
   }
+
   h3 {
     font-size: 1.5rem;
     padding-bottom: 1rem;
@@ -140,7 +155,7 @@ export const SideNote = styled.div`
 export const LinkStyle = styled(Link)`
   text-decoration: none;
   width: 30%;
-  padding: 0.5rem 0.7rem;
+  padding: 0.5rem 1rem;
   color: white;
   background-color: transparent;
   border: solid 2px white;
@@ -154,5 +169,8 @@ export const LinkStyle = styled(Link)`
   &:hover {
     background-color: white;
     color: #0e121e;
+  }
+  @media (max-width: 800px) {
+    width: 100%;
   }
 `;
