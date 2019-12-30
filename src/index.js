@@ -9,6 +9,9 @@ import contactReducer from './reducers/contact';
 import actsReducer from './reducers/acts';
 import App from './App';
 
+import * as serviceWorker from './serviceWorker';
+
+
 const rootReducer = combineReducers({
   auth: authReducer,
   act: actsReducer,
@@ -31,3 +34,9 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root')
 );
+
+if(module.hot) { 
+  module.hot.accept()
+}
+
+serviceWorker.register();
