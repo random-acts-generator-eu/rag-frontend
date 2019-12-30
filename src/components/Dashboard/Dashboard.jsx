@@ -50,9 +50,9 @@ class Dashboard extends Component {
             <ActLevel>Difficulty: {act.level}</ActLevel>
           </div>
           <Contact>
-            <p>
-              {contact.first_name} {contact.last_name}
-            </p>
+            <b>
+              Name: {contact.first_name} {contact.last_name}
+            </b>
             <p>Closeness: {contact.level}</p>
           </Contact>
           <ButtonDiv>

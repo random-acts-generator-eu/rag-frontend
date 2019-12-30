@@ -33,6 +33,9 @@ const Div = styled.div`
     font-weight: 700;
     font-style: italic;
     min-height: 130px;
+    @media (max-width: 800px) {
+      font-size: 2rem;
+    }
   }
 `;
 
@@ -43,6 +46,10 @@ const ActLevel = styled.p`
   font-size: 16px;
   font-family: 'B612 Mono', monospace;
   padding-top: 5px;
+  @media (max-width: 800px) {
+    justify-content: center;
+    flex-direction: column;
+  }
 `;
 
 const ButtonDiv = styled.div`

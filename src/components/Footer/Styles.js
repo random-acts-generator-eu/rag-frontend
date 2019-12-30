@@ -12,10 +12,15 @@ export const Div = styled.footer`
   padding: 1rem;
   bottom: 0;
   width: 100%;
+  @media (max-width: 800px) {
+   height: 90px;
+   margin-top: 20px;
+  }
   h3 {
     font-weight: bold;
     font-size: 1.5rem;
-    padding-bottom: 1rem;
+    padding-top: 10px;
+
   }
 
   p {

@@ -16,6 +16,8 @@ export const SignupForm = styled.div`
     display: flex;
     flex-direction: column-reverse;
     height: auto;
+    width: 90%;
+    margin: 2rem auto;
   }
 `;
 export const Form = styled.form`
@@ -41,10 +43,16 @@ export const Form = styled.form`
     width: 80%;
     display: flex;
     flex-direction: column;
+    @media (max-width: 800px) {
+      width: 100%;
+    }
     label {
       text-transform: uppercase;
       color: #a8a9af;
       margin-bottom: 0.5rem;
+      @media (max-width: 800px) {
+        font-size: 0.8rem;
+      }
     }
     input {
       width: 100%;
@@ -87,6 +95,11 @@ export const Form = styled.form`
     }
     &:focus {
       outline: 0;
+    }
+    @media (max-width: 800px) {
+      width: 100%;
+      padding: 0.5rem 0.6rem;
+      border-radius: 5px;
     }
   }
 `;
@@ -153,5 +166,8 @@ export const LinkStyle = styled(Link)`
   &:hover {
     background-color: white;
     color: #0e121e;
+  }
+  @media (max-width: 800px) {
+    width: 100%;
   }
 `;
